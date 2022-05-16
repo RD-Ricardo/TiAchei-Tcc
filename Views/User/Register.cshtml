@@ -1,20 +1,22 @@
 @{
     ViewData["Title"] = "Register";
 }
+@model RegisterViewModel
+
 <h1>Tela de Registro</h1>
 
-<form>
+<form asp-action="Register"  asp-controller="User">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="text"  asp-for="@Model.Nome" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="exampleInputPassword1">
+    <input type="email" asp-for="@Model.Email" class="form-control" id="exampleInputPassword1">
   </div>
  <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Senha</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <input type="password" asp-for="@Model.Senha" class="form-control" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-primary">Registre-se</button>
 </form>

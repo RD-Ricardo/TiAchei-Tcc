@@ -40,11 +40,11 @@ namespace TiAchei_Tcc.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FotoUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
+                    Email = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedEmail = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -200,16 +200,18 @@ namespace TiAchei_Tcc.Migrations
                 name: "Pets",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Foto = table.Column<string>(type: "longtext", nullable: true)
+                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Foto = table.Column<string>(type: "VARCHAR(250)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Perdido = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Tipo = table.Column<int>(type: "int", nullable: false),
                     DataCricao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Descricao = table.Column<string>(type: "longtext", nullable: true)
+                    Descricao = table.Column<string>(type: "VARCHAR(100)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -219,7 +221,8 @@ namespace TiAchei_Tcc.Migrations
                         name: "FK_Pets_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -229,11 +232,11 @@ namespace TiAchei_Tcc.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UrlRede = table.Column<string>(type: "longtext", nullable: true)
+                    UrlRede = table.Column<string>(type: "VARCHAR(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -243,7 +246,8 @@ namespace TiAchei_Tcc.Migrations
                         name: "FK_RedeSocials_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

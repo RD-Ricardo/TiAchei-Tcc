@@ -1,0 +1,69 @@
+@model List<Pet>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8" style="height: 80vh;">
+            @foreach (var item in Model)
+            {
+                <div class="card d-md-flex flex-row justify-content-between align-items-center p-3 mt-2 ">
+                    <div class="rounded-circle">
+                        <img class="border rounded-circle"  src="~/img/gato.jpg" width="50">
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </div>
+                    <div>
+                        @if(item.Perdido == true)
+                        {
+                            <i class="bi bi-x-circle-fill" style="color: red;"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-check-circle-fill" style="color:green;"></i>
+                        }
+                    </div>
+                    <div style="max-width: 70px; text-align: start;">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.DataCricao, "{0:dd/MM/yyyy}")
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Foto)
+                    </div>
+                    <div>   
+                        <button type="button" class="btn btn-outline-success"  data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil"></i></button>
+                        <a asp-action="Index" asp-controller="Qrcode" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver QRCode"><i class="bi bi-qr-code"></i></a>
+                        <button class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar"><i class="bi bi-archive"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            <div class="row card d-flex p-2"  style="height: 90vh;">
+                <div class="col-12 d-flex flex-column h-100 p-1">
+                    <h5 class="text-center mt-3 mb-4">INFORMAÇÕES</h5>
+                    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="mt-1 mb-4 col-12 d-flex justify-content-center rounded-circle">
+                            <img class="border rounded-circle"  src="~/img/usuario.jpg" width="150">
+                        </div>
+                        <div class="col-12">
+                            <ul class="d-flex flex-column justify-content-center align-items-start">
+                                <li class="list-group-item">Nome: Ricardo Dias</li>
+                                <li class="list-group-item mt-3">Telefone <span>(13) 98801-7249</span></li>
+                                <li class="list-group-item mt-3">Email: <span>ricardodias169@gmail.com</span></li>
+                                <li class="list-group-item mt-5 w-100 d-flex justify-content-center border rounded" style="background-color:#128c7f;"><a href="https://wa.me/5513988700724/" target="_blank" class="nav-link text-white"><i class="bi bi-whatsapp mr-4">&nbsp;&nbsp;WhastApp</i></a></li>
+                                <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#c25c67;"><a href="https://www.instagram.com/ricardodias169/" target="_blank" class="nav-link text-white"><i class="bi bi-instagram"">&nbsp;&nbsp;Instagram</i></a></li>
+                                <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#1298f6;"><a href="https://wa.me/5513988700724/" target="_blank" class="nav-link text-white"><i class="bi bi-facebook">&nbsp;&nbsp;Facebook</i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

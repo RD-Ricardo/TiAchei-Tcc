@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TiAchei_Tcc.Models;
+using TiAchei_Tcc.ViewModel;
 
 namespace TiAchei_Tcc.Controllers
 {
@@ -16,13 +17,15 @@ namespace TiAchei_Tcc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string retrunUrl)
         {
-            return View();
+            return View(new LoginViewModel(){
+                ReturnUrl = retrunUrl
+            });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserLogin model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
@@ -54,9 +57,16 @@ namespace TiAchei_Tcc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel  model)
+        public async Task<IActionResult> Register(RegisterViewModel  model)
         {
-            return Ok();
+            var user = new User(){Email = model.Email, UserName = model.Nome};
+            var result = await _userManager.CreateAsync(user, model.Senha);
+
+            if(result.Succeeded)
+            {
+                return RedirectToAction("Painel","Home");
+            }
+            return RedirectToAction("Index","Home");
         }
 
     }

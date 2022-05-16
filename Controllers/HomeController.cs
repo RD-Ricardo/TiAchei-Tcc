@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TiAchei_Tcc.Models;
 
@@ -30,6 +31,7 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public IActionResult Painel()
     {
         return View();

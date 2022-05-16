@@ -11,7 +11,7 @@ using TiAchei_Tcc.Db;
 namespace TiAchei_Tcc.Migrations
 {
     [DbContext(typeof(AppDbContextMysql))]
-    [Migration("20220506132227_init")]
+    [Migration("20220516015840_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,26 +151,30 @@ namespace TiAchei_Tcc.Migrations
 
             modelBuilder.Entity("TiAchei_Tcc.Models.Pet", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("DataCricao")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("longtext");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("Foto")
-                        .HasColumnType("longtext");
+                        .HasColumnType("VARCHAR(250)");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
 
                     b.Property<bool>("Perdido")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -187,12 +191,15 @@ namespace TiAchei_Tcc.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
 
                     b.Property<string>("UrlRede")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -215,6 +222,7 @@ namespace TiAchei_Tcc.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -254,6 +262,7 @@ namespace TiAchei_Tcc.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
@@ -324,16 +333,22 @@ namespace TiAchei_Tcc.Migrations
                 {
                     b.HasOne("TiAchei_Tcc.Models.User", "Usuario")
                         .WithMany("Pets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("TiAchei_Tcc.Models.RedeSocial", b =>
                 {
-                    b.HasOne("TiAchei_Tcc.Models.User", null)
+                    b.HasOne("TiAchei_Tcc.Models.User", "User")
                         .WithMany("RedesSocial")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TiAchei_Tcc.Models.User", b =>
