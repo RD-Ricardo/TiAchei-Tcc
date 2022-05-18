@@ -34,7 +34,7 @@
                         @Html.DisplayFor(modelItem => item.Foto)
                     </div>
                     <div>   
-                        <button type="button" class="btn btn-outline-success"  data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil"></i></button>
+                        <button type="button" class="btn btn-outline-success search" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil"></i></button>
                         <a asp-action="Index" asp-controller="Qrcode" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver QRCode"><i class="bi bi-qr-code"></i></a>
                         <button class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar"><i class="bi bi-archive"></i></button>
                     </div>
@@ -67,3 +67,53 @@
 </div>
 
 
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    const btn  = document.querySelectorAll('.search');
+    const btnFechar  = document.querySelector('.close');
+    let modal = document.querySelector('.modal-body');
+
+    btn.forEach(x => x.addEventListener('click', async ()=>{
+        const local = window.location.host;
+        const id = x.getAttribute('data-id');
+        const url = `https://${local}/painel/buscar/${id}`;
+        let response  = await fetch(url)
+        if(response.ok){
+
+            let result = await response.json();
+            modal.insertAdjacentHTML('beforeend', 
+            `
+                <input type="text" class="form-control" value="${result.nome}"><br>
+                <input type="text" class="form-control" value="${result.descricao}"><br>
+                <input type="checkbox" value="${result.tipo}"><br>
+            `);
+        }
+    }))
+
+    btnFechar.addEventListener('click', ()=>{
+        modal.innerHTML = "";
+    })
+</script>

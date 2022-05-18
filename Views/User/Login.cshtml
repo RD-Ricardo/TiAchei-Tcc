@@ -1,16 +1,33 @@
+@model LoginViewModel;
 @{
     ViewData["Title"] = "Login";
 }
-<h1>Tela de login</h1>
-<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Senha</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
-
+<link rel="stylesheet" href="~/css/styleLogin.css" asp-append-version="true" />
+ <div class="containner d-flex align-items-center justify-content-center" style="height: 80vh;">
+        <div id="conteudo">
+            <div id="box1">
+                <img class="mt-5" src="~/img/radar-mobile-app.png" alt="">
+                <h1>Ti Achei</h1><br/>
+                <p class="fs-5 mt-1">Crie sua conta</p>
+                <a class="bt" asp-action="Register" asp-controller="User">Cadastrar</a>
+            </div>
+            <div id="box2">
+                <h1>L o g i n</h1>
+                <form asp-action="Login" asp-controller="User">
+                    <div class="single-input">
+                        <input asp-for="@Model.Email" class="input" id="cpf" required>
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="single-input">
+                        <input type="password" asp-for="@Model.Senha" class="input" id="telefone" required>
+                        <label for="Senha">Senha</label>
+                    </div>
+                    <button class="bt mb-5">Login</button>
+                    <br>
+                    <br>
+                    <a class="btn" asp-action="Register" asp-controller="User">Esqueceu senha</a>
+                </form>
+            </div>                
+            </div>
+        </div>
+</div>

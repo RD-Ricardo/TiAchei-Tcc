@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -6,7 +7,7 @@ using TiAchei_Tcc.Repository.Interfaces;
 
 namespace TiAchei_Tcc.Controllers
 {
-    [Controller]
+    [Authorize]
     public class RegistroController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -25,7 +26,8 @@ namespace TiAchei_Tcc.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Pet model)
         {
-            // var userCurrent = await _userManager.GetUserAsync(User);
+            var userCurrent = await _userManager.GetUserAsync(User);
+
             if(ModelState.IsValid){
 
                 var petCurrent =  new Pet()
@@ -33,13 +35,13 @@ namespace TiAchei_Tcc.Controllers
                     Nome = model.Nome,
                     Foto = model.Foto,
                     Perdido = model.Perdido,
-                    UserId = "28888d2b-b1f1-4b23-9026-50b128937973",
+                    UserId = userCurrent.Id,
                     Tipo = model.Tipo,
                     Descricao = model.Descricao 
                 };
                 
                 await _repository.CreatePet(petCurrent);
-                return RedirectToAction("Index","Pet");
+                return RedirectToAction("Index","Painel");
             }
             else
             {

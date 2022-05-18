@@ -11,7 +11,7 @@ using TiAchei_Tcc.Db;
 namespace TiAchei_Tcc.Migrations
 {
     [DbContext(typeof(AppDbContextMysql))]
-    [Migration("20220516015840_init")]
+    [Migration("20220518131601_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

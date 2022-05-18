@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -6,6 +7,9 @@ using TiAchei_Tcc.Repository.Interfaces;
 
 namespace TiAchei_Tcc.Controllers
 {
+    [Authorize]
+    // [Controller]
+    // [Route("[controller]")]
     public class PainelController: Controller
     {   
         private readonly IPetRepository _repository;
@@ -21,6 +25,13 @@ namespace TiAchei_Tcc.Controllers
         {   
             var model = await _repository.GetAllUserId();
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Buscar(string id)
+        {   
+            var model = await _repository.GetBydId(id);
+            return Json(model);
         }
     }
 }

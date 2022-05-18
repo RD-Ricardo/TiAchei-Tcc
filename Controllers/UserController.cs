@@ -35,11 +35,11 @@ namespace TiAchei_Tcc.Controllers
 
                 if(result.Succeeded)
                 {   
-                    return RedirectToAction("","");
+                    return RedirectToAction("Index","Painel");
                 }
                 else
                 {
-                    return RedirectToAction("","");
+                    return View();
                 }
             }
             else
@@ -47,7 +47,6 @@ namespace TiAchei_Tcc.Controllers
                 ModelState.AddModelError("","");
                 return View(model);
             }
-            
         }
 
         [HttpGet]

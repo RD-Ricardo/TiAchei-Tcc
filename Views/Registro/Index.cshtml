@@ -1,25 +1,47 @@
 @model Pet
 @using TiAchei_Tcc.Enums
 
-<form class="col-md-4" asp-action="Index" asp-controller="Registro">
-    <h1 class="h3 mb-3 fw-normal">Registre seu Pet</h1>
-        <div class="form-floating">
-            <input asp-for="@Model.Nome" class="form-control" id="floatingInput" placeholder="n">
-            <label for="floatingInput">Nome</label>
-        </div>
-         <div class="form-floating">
-            <input asp-for="@Model.Foto" class="form-control" id="floatingPassword" placeholder="s">
-            <label for="floatingPassword">Foto</label>
-        </div>
-         <div class="form-floating">
-            <input asp-for="@Model.Perdido" >
-        </div>
-        <div>
-            <select asp-for="@Model.Tipo" asp-items="Html.GetEnumSelectList<Tipo>()"></select>
-        </div>
-        <div class="form-floating">
-            <input asp-for="@Model.Descricao" class="form-control" id="floatingPassword" placeholder="s">
-            <label for="floatingPassword">Descrição</label>
-        </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-</form>
+<link rel="stylesheet" href="~/css/cadastro.css" asp-append-version="true" />
+
+<div class="container d-flex justify-content-center align-items-center tamanho p-5">
+    <div class="conteudo">
+        <form method="POST" asp-action="Index" asp-controller="Registro">
+            <div class="iso d-flex just" style="width:100%;">
+                <div class="content1">
+                    <div class="single-input">
+                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
+                        <label for="Nome">Nome</label>
+                    </div>
+                    <div class="single-input">
+                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
+                        <label for="Raca">Raça</label>
+                    </div>
+                    <div class="single-input">
+                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
+                        <label for="Nome">Nome</label>
+                    </div>
+                    <div class="single-input">
+                        <select class="select" asp-for="@Model.Tipo" asp-items="Html.GetEnumSelectList<Tipo>()">
+                            <option> Selecione</option>
+                        </select>
+                    </div>
+                     
+                        <input  asp-for="@Model.Perdido" >
+                    
+                </div>
+                <div class="content2 d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <img src="~/img/petimagem.png" alt="" srcset="" width="150" class=" p-1 border rounded-circle pet-img">
+                        <button class="mt-3 btn btn-outline-success btn-sm">Upload<i class="bi bi-upload"></i></button>
+                    </div>
+                 </div>
+            </div>
+            <div class="content3 mt-4">
+                <textarea name="" id="" cols="30" rows="5" placeholder="Descrição"></textarea>
+            </div>
+            <div class="d-grid ">
+                <button class="bt" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>                
