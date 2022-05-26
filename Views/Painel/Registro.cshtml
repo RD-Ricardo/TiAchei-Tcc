@@ -5,29 +5,22 @@
 
 <div class="container d-flex justify-content-center align-items-center tamanho p-5">
     <div class="conteudo">
-        <form method="POST" asp-action="Index" asp-controller="Registro">
+        <form method="POST" asp-action="Registro" asp-controller="Painel">
             <div class="iso d-flex just" style="width:100%;">
                 <div class="content1">
                     <div class="single-input">
-                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
+                        <input asp-for="@Model.Nome" class="input" required>
                         <label for="Nome">Nome</label>
                     </div>
                     <div class="single-input">
-                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
+                        <input asp-for="@Model.Raca" class="input" required>
                         <label for="Raca">Raça</label>
-                    </div>
-                    <div class="single-input">
-                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
-                        <label for="Nome">Nome</label>
                     </div>
                     <div class="single-input">
                         <select class="select" asp-for="@Model.Tipo" asp-items="Html.GetEnumSelectList<Tipo>()">
                             <option> Selecione</option>
                         </select>
                     </div>
-                     
-                        <input  asp-for="@Model.Perdido" >
-                    
                 </div>
                 <div class="content2 d-flex justify-content-center align-items-center">
                     <div class="d-flex justify-content-center align-items-center flex-column">
@@ -37,7 +30,7 @@
                  </div>
             </div>
             <div class="content3 mt-4">
-                <textarea name="" id="" cols="30" rows="5" placeholder="Descrição"></textarea>
+                <textarea name="Descricao" id="" cols="30" rows="5" asp-for="@Model.Descricao"></textarea>
             </div>
             <div class="d-grid ">
                 <button class="bt" type="submit">Enviar</button>

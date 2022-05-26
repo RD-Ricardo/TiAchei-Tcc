@@ -64,8 +64,8 @@ app.UseEndpoints(endpoit =>
 
     endpoit.MapControllerRoute(
         name: "cardfiltro",
-        pattern: "Card/{userId?}",
-        defaults: new { Controller = "Card", Action = "Index"}
+        pattern: "Card/Perfil/{id?}",
+        defaults: new { Controller = "Card", Action = "Perfil"}
     );
 
     endpoit.MapControllerRoute(
@@ -73,6 +73,22 @@ app.UseEndpoints(endpoit =>
         pattern: "Painel/buscar/{id?}",
         defaults: new { Controller = "Painel", Action = "Buscar"}
     );
+    endpoit.MapControllerRoute(
+        name: "deletarid",
+        pattern: "Painel/deletar/{id?}",
+        defaults: new { Controller = "Painel", Action = "Deletar"}
+    );
+    endpoit.MapControllerRoute(
+        name: "qrcodeid",
+        pattern: "Painel/QrCode/{id?}",
+        defaults: new { Controller = "Painel", Action = "Qrcode"}
+    );
+     endpoit.MapControllerRoute(
+        name: "imgqrcodeid",
+        pattern: "ImgQrCode/{id?}",
+        defaults: new { Controller = "ImgQrCode", Action = "Index"}
+    );
+    
     endpoit.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}"

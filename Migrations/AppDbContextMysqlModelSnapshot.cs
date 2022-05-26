@@ -168,6 +168,10 @@ namespace TiAchei_Tcc.Migrations
                     b.Property<bool>("Perdido")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("Raca")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
+
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 

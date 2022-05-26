@@ -63,7 +63,7 @@ namespace TiAchei_Tcc.Controllers
 
             if(result.Succeeded)
             {
-                return RedirectToAction("Painel","Home");
+                return RedirectToAction("Index","Painel");
             }
             return RedirectToAction("Index","Home");
         }

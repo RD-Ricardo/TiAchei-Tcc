@@ -12,6 +12,7 @@ namespace TiAchei_Tcc.Repository
         {
             _dbrepository = dbrepository;
         }
-        public async Task<User> GetUserUrl(string userId) => await _dbrepository.Users.FirstOrDefaultAsync(x => x.Id == userId);
+        public async Task<Pet> GetUserUrl(string userId) => await _dbrepository.Pets.Where(c => c.Id == userId).FirstOrDefaultAsync();
+
     }
 }

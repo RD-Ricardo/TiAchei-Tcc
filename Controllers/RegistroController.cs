@@ -28,26 +28,21 @@ namespace TiAchei_Tcc.Controllers
         {
             var userCurrent = await _userManager.GetUserAsync(User);
 
-            if(ModelState.IsValid){
-
+            
                 var petCurrent =  new Pet()
                 {
                     Nome = model.Nome,
-                    Foto = model.Foto,
-                    Perdido = model.Perdido,
+                    Raca = model.Raca,
+                    Foto = "test",
+                    Perdido = false,
                     UserId = userCurrent.Id,
                     Tipo = model.Tipo,
                     Descricao = model.Descricao 
                 };
-                
+            
                 await _repository.CreatePet(petCurrent);
                 return RedirectToAction("Index","Painel");
-            }
-            else
-            {
-                ViewBag.Erro =  "Erro ao enviar os dados";
-                return View();
-            }                        
+                      
         }
     }
 }

@@ -11,7 +11,7 @@ using TiAchei_Tcc.Db;
 namespace TiAchei_Tcc.Migrations
 {
     [DbContext(typeof(AppDbContextMysql))]
-    [Migration("20220518131601_init")]
+    [Migration("20220521211920_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,10 @@ namespace TiAchei_Tcc.Migrations
 
                     b.Property<bool>("Perdido")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Raca")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(30)");
 
                     b.Property<int>("Tipo")
                         .HasColumnType("int");

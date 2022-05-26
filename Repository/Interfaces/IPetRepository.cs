@@ -6,5 +6,6 @@ namespace TiAchei_Tcc.Repository.Interfaces
         Task<Pet> GetBydId(string id);
         Task<List<Pet>> GetAllUserId();
         Task CreatePet(Pet model);
+        Task<bool> DeletarPet(string id);
     }
 }

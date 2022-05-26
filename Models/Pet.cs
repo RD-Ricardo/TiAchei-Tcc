@@ -8,6 +8,7 @@ namespace TiAchei_Tcc.Models
         [Key]
         public string  Id { get; set; } = Guid.NewGuid().ToString();
         public string Nome { get; set; }
+        public string  Raca { get; set; }
         public string  Foto { get; set; }
         public bool Perdido { get; set; }
         public Tipo Tipo { get; set; }

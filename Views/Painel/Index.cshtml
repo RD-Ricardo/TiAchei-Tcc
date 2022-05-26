@@ -1,45 +1,53 @@
-@model List<Pet>
+@model PainelViewModel
 <div class="container">
     <div class="row">
-        <div class="col-md-8" style="height: 80vh;">
-            @foreach (var item in Model)
-            {
-                <div class="card d-md-flex flex-row justify-content-between align-items-center p-3 mt-2 ">
-                    <div class="rounded-circle">
-                        <img class="border rounded-circle"  src="~/img/gato.jpg" width="50">
-                    </div>
-                    <div>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </div>
-                    <div>
-                        @if(item.Perdido == true)
-                        {
-                            <i class="bi bi-x-circle-fill" style="color: red;"></i>
-                        }
-                        else
-                        {
-                            <i class="bi bi-check-circle-fill" style="color:green;"></i>
-                        }
-                    </div>
-                    <div style="max-width: 70px; text-align: start;">
-                        @Html.DisplayFor(modelItem => item.Descricao)
-                    </div>
-                    <div>
-                        @Html.DisplayFor(modelItem => item.DataCricao, "{0:dd/MM/yyyy}")
-                    </div>
-                    <div>
-                        @Html.DisplayFor(modelItem => item.Tipo)
-                    </div>
-                    <div>
-                        @Html.DisplayFor(modelItem => item.Foto)
-                    </div>
-                    <div>   
-                        <button type="button" class="btn btn-outline-success search" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil"></i></button>
-                        <a asp-action="Index" asp-controller="Qrcode" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver QRCode"><i class="bi bi-qr-code"></i></a>
-                        <button class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar"><i class="bi bi-archive"></i></button>
-                    </div>
-                </div>
-            }
+        <div class="col-md-8 mt-3" style="height: 80vh;">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Foto</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Data Criação</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Funçoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pets)
+                {
+                    <tr>
+                        <td>
+                            <img class="border rounded-circle"  src="~/img/gato.jpg" width="50">
+                        </td>
+                        <td>Mark</td>
+                        <td>
+                            @if(item.Perdido == true)
+                            {
+                                <span class="badge bg-danger">desaparecido</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">encontrado</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataCricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-success search" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="bi bi-pencil"></i></button>
+                            <a href="@Url.Action("QrCode", "Painel", new { id = item.Id })" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="QR Code"><i class="bi bi-qr-code"></i></a>
+                            <button type="button" class="btn btn-outline-danger deletar" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-archive"></i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+
+           
         </div>
         <div class="col-md-4">
             <div class="row card d-flex p-2"  style="height: 90vh;">
@@ -51,9 +59,9 @@
                         </div>
                         <div class="col-12">
                             <ul class="d-flex flex-column justify-content-center align-items-start">
-                                <li class="list-group-item">Nome: Ricardo Dias</li>
-                                <li class="list-group-item mt-3">Telefone <span>(13) 98801-7249</span></li>
-                                <li class="list-group-item mt-3">Email: <span>ricardodias169@gmail.com</span></li>
+                                <li class="list-group-item">Nome: @Model.Usuario.UserName</li>
+                                <li class="list-group-item mt-3">Telefone <span>@Model.Usuario.PhoneNumber</span></li>
+                                <li class="list-group-item mt-3">Email: <span>@Model.Usuario.Email</span></li>
                                 <li class="list-group-item mt-5 w-100 d-flex justify-content-center border rounded" style="background-color:#128c7f;"><a href="https://wa.me/5513988700724/" target="_blank" class="nav-link text-white"><i class="bi bi-whatsapp mr-4">&nbsp;&nbsp;WhastApp</i></a></li>
                                 <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#c25c67;"><a href="https://www.instagram.com/ricardodias169/" target="_blank" class="nav-link text-white"><i class="bi bi-instagram"">&nbsp;&nbsp;Instagram</i></a></li>
                                 <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#1298f6;"><a href="https://wa.me/5513988700724/" target="_blank" class="nav-link text-white"><i class="bi bi-facebook">&nbsp;&nbsp;Facebook</i></a></li>
@@ -66,13 +74,22 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center">Deseja excluir mesmo esse Pet?</h6>
+        <div class="d-flex justify-content-center p-2">
+            <button type="button" class="btn btn-success sim">Sim</button>
+            <button type="button" class="btn btn-danger mr-5">Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -81,20 +98,20 @@
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
         <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body update">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-outline-primary input-disable"><i class="bi bi-key"></i></button>
       </div>
     </div>
   </div>
 </div>
 
-
 <script>
     const btn  = document.querySelectorAll('.search');
     const btnFechar  = document.querySelector('.close');
-    let modal = document.querySelector('.modal-body');
+    let modal = document.querySelector('.update');
 
     btn.forEach(x => x.addEventListener('click', async ()=>{
         const local = window.location.host;
@@ -106,14 +123,47 @@
             let result = await response.json();
             modal.insertAdjacentHTML('beforeend', 
             `
-                <input type="text" class="form-control" value="${result.nome}"><br>
-                <input type="text" class="form-control" value="${result.descricao}"><br>
-                <input type="checkbox" value="${result.tipo}"><br>
+                <input type="text" class="form-control" id="nome" value="${result.nome}" disabled><br>
+                <input type="text" class="form-control" id="raca" value="${result.raca}" disabled><br>
+                <input type="checkbox" disabled id="perdido"${result.perdido == true ?  "" : "checked"} "><br>
+                <textarea class="form-control" id="descricao"  cols="30" rows="5" disabled>${result.descricao}</textarea>
             `);
         }
     }))
 
     btnFechar.addEventListener('click', ()=>{
         modal.innerHTML = "";
-    })
+    });
+
+
+    const btnDeletar = document.querySelectorAll('.deletar');
+    const btnSim = document.querySelector('.sim');
+    btnDeletar.forEach(x => x.addEventListener('click', ()=>{
+        const localDeletar = window.location.host;
+        const idDeletar = x.getAttribute('data-id');
+        btnSim.addEventListener('click', async ()=>{
+            console.log(idDeletar);
+            const urlNova = `https://${localDeletar}/painel/deletar/${idDeletar}`;
+            let response  = await fetch(urlNova,{ method:"DELETE" });
+             if(response.ok){
+                window.location.reload();
+            }  
+        });
+    }))
+    
+
+    const btnDisable  = document.querySelector('.input-disable');
+
+    btnDisable.addEventListener('click',()=>{
+        const inputNome = document.getElementById('nome');
+        const inputRaca = document.getElementById('raca');
+        const inputPerdido = document.getElementById('perdido');
+        const inputDescricao = document.getElementById('descricao');
+        inputNome.removeAttribute('disabled'); 
+        inputRaca.removeAttribute('disabled'); 
+        inputDescricao.removeAttribute('disabled');
+        inputPerdido.removeAttribute('disabled');
+    });
+
+
 </script>

@@ -16,7 +16,21 @@ namespace TiAchei_Tcc.Repository
         {
             await _dbContext.Pets.AddAsync(model);
             await _dbContext.SaveChangesAsync();
-        } 
+        }
+
+        public async Task<bool> DeletarPet(string id)
+        {
+            var petResult = await GetBydId(id);
+            if(petResult == null) return false;
+            _dbContext.Pets.Remove(petResult);
+            if(await _dbContext.SaveChangesAsync() > 0){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
         public async Task<List<Pet>> GetAllUserId() => await _dbContext.Pets.ToListAsync();
 
         public async Task<Pet> GetBydId(string id) => await _dbContext.Pets.Where(x => x.Id == id).FirstOrDefaultAsync();

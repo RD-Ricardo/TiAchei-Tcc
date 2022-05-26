@@ -204,6 +204,8 @@ namespace TiAchei_Tcc.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Raca = table.Column<string>(type: "VARCHAR(30)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Foto = table.Column<string>(type: "VARCHAR(250)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Perdido = table.Column<bool>(type: "tinyint(1)", nullable: false),
