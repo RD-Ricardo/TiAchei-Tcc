@@ -18,18 +18,21 @@ namespace TiAchei_Tcc.Controllers
     {   
         private readonly IPetRepository _repository;
         private readonly UserManager<User> _userManager;
-        public PainelController(IPetRepository repository,  UserManager<User> userManager)
+        private readonly ServiceUploadFile _serviceUpload;
+        public PainelController(IPetRepository repository,  UserManager<User> userManager , 
+                ServiceUploadFile serviceUpload)
         {
             _userManager = userManager;
             _repository = repository;
+            _serviceUpload = serviceUpload;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
-        {   
-           
-            var resultPets = await _repository.GetAllUserId();
-            var userCurrent = await _userManager.GetUserAsync(User);
+        {  
+            var userCurrent = await _userManager.GetUserAsync(User); 
+            
+            var resultPets = await _repository.GetAllPetsUserCurrent(userCurrent);
 
             var viewModel = new PainelViewModel()
             {
@@ -65,23 +68,23 @@ namespace TiAchei_Tcc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registro(Pet model)
+        public async Task<IActionResult> Registro(PetViewModel model)
         {
             var userCurrent = await _userManager.GetUserAsync(User);
     
-                var petCurrent =  new Pet()
-                {
-                    Nome = model.Nome,
-                    Raca = model.Raca,
-                    Foto = "test",
-                    Perdido = false,
-                    UserId = userCurrent.Id,
-                    Tipo = model.Tipo,
-                    Descricao = model.Descricao 
-                };
+            var petCurrent =  new Pet()
+            {
+                Nome = model.Nome,
+                Raca = model.Raca,
+                Foto = _serviceUpload.UploadFilePet(model),
+                Perdido = false,
+                UserId = userCurrent.Id,
+                Tipo = model.Tipo,
+                Descricao = model.Descricao 
+            };
             
-                await _repository.CreatePet(petCurrent);
-                return RedirectToAction("Index","Painel");             
+            await _repository.CreatePet(petCurrent);
+            return RedirectToAction("Index","Painel");             
         }
 
         [HttpGet]

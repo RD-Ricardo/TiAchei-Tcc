@@ -6,6 +6,7 @@ using TiAchei_Tcc.Db;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Repository;
 using TiAchei_Tcc.Repository.Interfaces;
+using TiAchei_Tcc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnetion");
@@ -39,6 +40,7 @@ builder.Services.ConfigureApplicationCookie(options =>
         
 builder.Services.AddScoped<IPetRepository, PetRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ServiceUploadFile>();
 
 var app = builder.Build();
 

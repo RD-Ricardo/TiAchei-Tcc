@@ -31,8 +31,10 @@ namespace TiAchei_Tcc.Repository
             }
         }
 
-        public async Task<List<Pet>> GetAllUserId() => await _dbContext.Pets.ToListAsync();
-
-        public async Task<Pet> GetBydId(string id) => await _dbContext.Pets.Where(x => x.Id == id).FirstOrDefaultAsync();
+        public async Task<List<Pet>> GetAllPetsUserCurrent(User model)
+            =>  await _dbContext.Pets.Where(c  => c.UserId == model.Id).ToListAsync();
+        
+        public async Task<Pet> GetBydId(string id) 
+            => await _dbContext.Pets.Where(x => x.Id == id).FirstOrDefaultAsync();
     }
 }

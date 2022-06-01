@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TiAchei_Tcc.Models;
+using TiAchei_Tcc.Services;
 using TiAchei_Tcc.ViewModel;
 
 namespace TiAchei_Tcc.Controllers
@@ -9,11 +10,15 @@ namespace TiAchei_Tcc.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signManager;
+        private readonly ServiceUploadFile _serviceUpload;
+        
         public UserController(UserManager<User> userManager,
-            SignInManager<User> signManager)
+            SignInManager<User> signManager, ServiceUploadFile serviceUpload)
         {
             _userManager = userManager;
             _signManager = signManager;
+            _serviceUpload = serviceUpload;
+           
         }
 
         [HttpGet]
@@ -39,7 +44,8 @@ namespace TiAchei_Tcc.Controllers
                 }
                 else
                 {
-                    return View();
+                    ViewData["Error"] = "Deu Erro no login";
+                    return View(ViewData);
                 }
             }
             else
@@ -58,7 +64,14 @@ namespace TiAchei_Tcc.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel  model)
         {
-            var user = new User(){Email = model.Email, UserName = model.Nome};
+            
+
+            var user = new User()
+            {
+                Email = model.Email, 
+                UserName = model.Nome,
+                FotoUrl = _serviceUpload.UploadFile(model)
+            };
             var result = await _userManager.CreateAsync(user, model.Senha);
 
             if(result.Succeeded)
@@ -67,7 +80,5 @@ namespace TiAchei_Tcc.Controllers
             }
             return RedirectToAction("Index","Home");
         }
-
     }
-
 }

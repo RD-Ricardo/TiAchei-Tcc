@@ -3,33 +3,74 @@
 }
 @model RegisterViewModel
 <link rel="stylesheet" href="~/css/styleLogin.css" asp-append-version="true" />
- <div class="containner d-flex align-items-center justify-content-center" style="height: 80vh;">
+<div class="container p-5">
+    <div class="row vh-70 align-items-center conteudo mt-2 border rounded ">
+        <div class="col-md-4 box1">
+           <div class="row d-flex align-items-center justify-content-center" style="height:600px;">
+               <div class="col-12 d-flex flex-column align-items-center" >
+                    <img src="~/img/radar-mobile-app.png" alt="" width="200">
+                    <h2>Ti Achei</h2>
+                    <h5>Já tem conta?</h5>
+                    <button class="btn bt">Login</button>
+                </div>
+           </div>
+        </div>
+        <div class="col-md-8" style="background-color:aliceblue ;">
+            <h2 class="text-center  mt-4 mb-2">CADASTRAR</h2>
+            <form class="row g-3 p-3" asp-action="Register" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Nome</label>
+                        <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Telefone</label>
+                        <input type="password" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="inputAddress">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label">Senha</label>
+                        <input type="text" class="form-control" id="inputAddress2">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Facebook<span class="text-muted">(Optional)</span></label>
+                        <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Instagram<span class="text-muted">(Optional)</span></label>
+                        <input type="password" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                        <label for="formFile" class="form-label">Carregar Foto</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn bt"  type="button">CADASTRAR</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+
+ @* <div class="containner d-flex align-items-center justify-content-center" style="height: 80vh;">
         <div id="conteudo">
             <div id="box1">
-                <img class="mt-5" src="~/img/radar-mobile-app.png" alt="">
+                <img class="mt-5" src="~/img/radar-mobile-app.png" alt="" width="50">
                 <h1>Ti Achei</h1><br/>
                 <h2>Seja bem vindo!</h2><br/>
                 <p class="fs-5">Faça o Login</p>
                 <a class="bt" asp-action="Login" asp-controller="User">Entrar</a>
             </div>
             <div id="box2">
-                <h1>Cadastrar</h1>
-                <form asp-action="Register" asp-controller="User" method="post">
-                    <div class="single-input">
-                        <input asp-for="@Model.Nome" class="input" id="cpf" required>
-                        <label for="Nome">Nome</label>
-                    </div>
-                    <div class="single-input">
-                        <input asp-for="@Model.Email" class="input" id="cpf" required>
-                        <label for="Email">Email</label>
-                    </div>
-                    <div class="single-input">
-                        <input type="password" asp-for="@Model.Senha" class="input" id="telefone" required>
-                        <label for="Senha">Senha</label>
-                    </div>
-                    <button type="submit" class="bt mb-5">Cadastrar-se</button>
-                </form>
+                
             </div>                
-            </div>
         </div>
+    </div>
 </div>
+
+
+ *@
