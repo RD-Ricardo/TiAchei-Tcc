@@ -1,5 +1,7 @@
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Routing.Tree;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TiAchei_Tcc.Db;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Repository.Interfaces;
@@ -18,7 +20,7 @@ namespace TiAchei_Tcc.Repository
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> DeletarPet(string id)
+        public async Task<bool> DeletePet(string id)
         {
             var petResult = await GetBydId(id);
             if(petResult == null) return false;
@@ -36,5 +38,18 @@ namespace TiAchei_Tcc.Repository
         
         public async Task<Pet> GetBydId(string id) 
             => await _dbContext.Pets.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+        public async Task<bool> Update(Pet newModel)
+        {
+           _dbContext.Pets.Update(newModel);
+           if( await _dbContext.SaveChangesAsync() > 0)
+           {
+               return true;
+           }
+           else
+           {
+               return false;
+           }
+        }
     }
 }

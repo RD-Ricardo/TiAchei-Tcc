@@ -11,7 +11,7 @@ using TiAchei_Tcc.Db;
 namespace TiAchei_Tcc.Migrations
 {
     [DbContext(typeof(AppDbContextMysql))]
-    [Migration("20220521211920_init")]
+    [Migration("20220602034446_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -264,6 +264,12 @@ namespace TiAchei_Tcc.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UrlFacebook")
+                        .HasColumnType("VARCHAR(150)");
+
+                    b.Property<string>("UrlInstagram")
+                        .HasColumnType("VARCHAR(150)");
 
                     b.Property<string>("UserName")
                         .IsRequired()

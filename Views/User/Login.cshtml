@@ -3,32 +3,40 @@
     ViewData["Title"] = "Login";
 }
 <link rel="stylesheet" href="~/css/styleLogin.css" asp-append-version="true" />
- <div class="containner d-flex align-items-center justify-content-center" style="height: 80vh;">
-        <div id="conteudo">
-            <div id="box1">
-                <img class="mt-5" src="~/img/radar-mobile-app.png" alt="">
-                <h1>Ti Achei</h1><br/>
-                <p class="fs-5 mt-1">Crie sua conta</p>
-                <a class="bt" asp-action="Register" asp-controller="User">Cadastrar</a>
-            </div>
-            <div id="box2">
-                <h1>L o g i n</h1>
-                <form asp-action="Login" asp-controller="User">
-                    <div class="single-input">
-                        <input asp-for="@Model.Email" class="input" id="cpf" required>
-                        <label for="Email">Email</label>
-                    </div>
-                    <div class="single-input">
-                        <input type="password" asp-for="@Model.Senha" class="input" id="telefone" required>
-                        <label for="Senha">Senha</label>
-                    </div>
-                    <button class="bt mb-5">Login</button>
-                    <br>
-                    <br>
-                    @ViewData["Error"]
-                    <a class="btn" asp-action="Register" asp-controller="User">Esqueceu senha</a>
-                </form>
-            </div>                
-            </div>
+<div class="container p-5">
+    <div class="row vh-70 align-items-center conteudo mt-2 border rounded shadow">
+        <div class="col-md-4 box1">
+           <div class="row d-flex align-items-center justify-content-center" style="height:600px;">
+               <div class="col-12 d-flex flex-column align-items-center" >
+                    <img src="~/img/radar-mobile-app.png" alt="" width="200">
+                    <h2 class="mt-3" style="font-weight: bold;color:#363636;">Ti Achei</h2>
+                    <h6>Não tem conta, crie uma.</h6>
+                    <a asp-action="Cadastrar" asp-controller="User" class="btn bt mt-1" style="width:120px;">Cadastre-se</a>
+                </div>
+           </div>
         </div>
+        <div class="col-md-8">
+            <h2 class="text-center  mt-1 mb-5" style="font-weight: bold; color:#808080;">LOGIN</h2>
+            <form class="row g-3" asp-action="Login" asp-controller="User" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="@Model.ReturnUrl">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-6">
+                              <div class="col-12">
+                                <label asp-for="@Model.Email" class="form-label"></label>
+                                <input asp-for="@Model.Email" class="form-control">
+                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="@Model.Senha" class="form-label"></label>
+                                <input asp-for="@Model.Senha" type="password" class="form-control">
+                                <span asp-validation-for="@Model.Senha" class="text-danger"></span>
+                            </div>
+                             <div class="d-grid gap-2 mt-4">
+                                <button class="btn bt" type="submit">Entrar</button>
+                            </div>
+                        </div>
+                    </div>
+             </form>
+        </div>
+    </div>
 </div>

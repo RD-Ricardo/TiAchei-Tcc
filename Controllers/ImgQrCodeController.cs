@@ -5,11 +5,6 @@ namespace TiAchei_Tcc.Controllers
 {
     public class ImgQrCodeController : Controller
     {
-        public ImgQrCodeController()
-        {
-            
-        }
-
         [HttpGet]
         public IActionResult Index(string id)
         {

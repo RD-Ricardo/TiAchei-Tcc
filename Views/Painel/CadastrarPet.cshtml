@@ -1,0 +1,42 @@
+@model PetViewModel
+@using TiAchei_Tcc.Enums
+
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+<div class="container">
+    <div class="row vh-100 align-items-center ">
+        <div class="col-md-12 border rounded shadow">
+            <h2 class="text-center mt-5 mb-1" style="font-weight: bold; color:#808080;">ADICIONAR PET</h2>
+            <form asp-action="CadastrarPet" asp-controller="Painel" method="post" enctype="multipart/form-data">
+                <div class="col-12">
+                    <label asp-for="@Model.Nome" class="form-label"></label>
+                    <input asp-for="@Model.Nome" class="form-control">
+                    <span asp-validation-for="@Model.Nome" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="@Model.Raca" class="form-label"></label>
+                    <input asp-for="@Model.Raca" class="form-control">
+                    <span asp-validation-for="@Model.Raca" class="text-danger"></span>
+                </div>
+                <div class="col-12 mt-3">
+                     <select class="form-select" asp-for="@Model.Tipo" asp-items="Html.GetEnumSelectList<Tipo>()">
+                            <option> Selecione</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <div class="mb-1">
+                        <label for="formFile" class="form-label"></label>
+                        <input asp-for="@Model.Profile" class="form-control" type="file">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="content3 mt-4">
+                        <textarea name="Descricao" id="" cols="30" rows="5" asp-for="@Model.Descricao"></textarea>
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-4 mb-4">
+                    <button class="btn bt" type="submit">Adicionar</button>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>

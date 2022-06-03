@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+@model RegisterViewModel
+<link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
+<div class="container">
+    <div class="row mt-5 ">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <div class="row align-items-center border rounded shadow">
+                <div class="col-md-4">
+                    <div class="row" >
+                        <div class="col-12 d-flex flex-column justify-content-center align-items-center" style=" background-color: #49eebc; height:600px;">
+                            <img src="~/img/radar-mobile-app.png" alt="" width="200">
+                            <h2 class="mt-3" style="font-weight: bold;color:#363636;">Ti Achei</h2>
+                            <h6>Já tem conta, Faça o Login.</h6>
+                            <a asp-action="Login" asp-controller="User" class="btn bt" style="width:100px;">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="text-center  mt-4 mb-2" style="font-weight: bold; color:#808080;">CADASTRE-SE</h2>
+                    <form class="row g-3 p-3" asp-action="Cadastrar" asp-controller="User" method="post" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <label asp-for="@Model.Nome" class="form-label"></label>
+                                <input asp-for="@Model.Nome" class="form-control" id="inputEmail4">
+                                <span asp-validation-for="@Model.Nome" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="@Model.Telefone" class="form-label"></label>
+                                <input asp-for="@Model.Telefone" class="form-control" id="telefone">
+                                <span asp-validation-for="@Model.Telefone" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="@Model.Email" class="form-label">Email</label>
+                                <input asp-for="@Model.Email" type="email" class="form-control" id="inputAddress">
+                                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="@Model.Senha" class="form-label"></label>
+                                <input asp-for="@Model.Senha" type="password" class="form-control">
+                                <span asp-validation-for="@Model.Senha" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="@Model.UrlFacebook" class="form-label">Facebook<span class="text-muted">(Opcional)</span></label>
+                                <input asp-for="@Model.UrlFacebook" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="@Model.UrlInstagram" class="form-label">Instagram<span class="text-muted">(Opcional)</span></label>
+                                <input asp-for="@Model.UrlInstagram" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="@Model.Profile class="form-label">Carregar Foto<span class="text-muted">(Opcional)</span></label>
+                                <input asp-for="@Model.Profile" class="form-control" type="file">
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn bt" type="submit">CADASTRAR</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* @section Scripts
+{
+    <script src="~/js/jquery.mask.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function(){
+            $('#telefone').mask('(00)00000-0000');
+        });
+    </script>
+} *@

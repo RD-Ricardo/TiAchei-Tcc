@@ -65,6 +65,11 @@ app.UseEndpoints(endpoit =>
     endpoit.MapDefaultControllerRoute();
 
     endpoit.MapControllerRoute(
+        name: "editar",
+        pattern: "Painel/Editar/{id?}",
+        defaults: new { Controller = "Painel", Action = "Editar"}
+    );
+    endpoit.MapControllerRoute(
         name: "cardfiltro",
         pattern: "Card/Perfil/{id?}",
         defaults: new { Controller = "Card", Action = "Perfil"}

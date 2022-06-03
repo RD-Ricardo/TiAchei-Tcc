@@ -38,6 +38,10 @@ namespace TiAchei_Tcc.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    UrlFacebook = table.Column<string>(type: "VARCHAR(150)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UrlInstagram = table.Column<string>(type: "VARCHAR(150)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     FotoUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)

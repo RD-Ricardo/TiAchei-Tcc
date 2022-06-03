@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]Ti Achei</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
-         <nav class="navbar navbar-expand-lg  bg-primary-color teste" id="navbar">
-            <div class="container py-3">
-            <a href="#" class="navbar-brand primary-color">
-                <img src="~/img/LogoReverso.png" class="logo" alt="TiACheiLogo" width="100"/>
+         <nav class="navbar navbar-expand-lg  bg-primary-color" id="navbar">
+            <div class="container">
+            <a asp-action="Index" asp-controller="Home" class="navbar-brand primary-color">
+                <img src="~/img/pLogo.png"  alt="TiACheiLogo" width="80" height="50"/>
             </a>
             <button class="navbar-toggler primary-color" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false"
@@ -22,128 +22,138 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar-items">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active primary-color" aria-current="page">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="projeto.html" class="nav-link primary-color">Projeto</a>
-                </li>
-                <li class="nav-item">
-                    <a href="quemSomos.html" class="nav-link primary-color">Quem Somos</a>
-                </li>
-                <li class="nav-item">
-                    <a href="parcerias.html" class="nav-link primary-color">Parcerias</a>
-                </li>
-                <li class="nav-item">
-                    <a href="contato.html" class="nav-link primary-color">Contato</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary-color" href="@Url.Action("Index","Home")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary-color" href="@Url.Action("Projeto","Home")">Projeto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link primary-color" href="@Url.Action("QuemSomos","Home")">Quem Somos</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {   <li class="nav-item">
+                            <a class="nav-link primary-color" href="@Url.Action("Index","Painel")">Painel</a>
+                        </li>
+                    } 
                 </ul>
-
                 <ul class="navbar-user me-auto mb-2 mb-lg-0">
                 <li class="nav-user">
                     <div class="dropdown">
-
-                    <button class="btn btn-success dropdown-toggle bg-color3" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle"></i>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                        <li><a class="dropdown-item" href="#">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Cadastrar-se</a></li>
-                        <li><a class="dropdown-item" href="#">Esqueci a senha</a></li>
-                    </ul>
+                        <button class="btn btn-success dropdown-toggle bg-color3" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            @if(User.Identity.IsAuthenticated)
+                            {
+                                <form asp-action="Logout" asp-controller="User" method="POST">
+                                    <li>
+                                        <input class="dropdown-item" type="submit" value="Logout">
+                                    </li>
+                                </form>
+                            } 
+                            else
+                            {
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Login","User")">Login</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("Cadastrar","User")">Cadastrar</a>
+                                </li>
+                            } 
+                        </ul>
                     </div>
                 </li>
                 </ul>
-
-            </div>
+             </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    
+    @RenderBody()
 
-   
-        @* <footer class="container-fluid bg-secondary-color" id="footer">
-            <div class="container">
-            <div class="row">
-                <div class="col-12" id="footer-details">
-                <div class="row">
-                    <div class="col-12 col-md-4" id="news-container">
-                    <div class="col-12" id="footer-top">
-                        <div class="col-4 img-fluid "><img src="img/logoEquipe.png" alt="Logo Tech Work" class="logoFooter"></div>                    
-                    </div>
+    <footer class="container-fluid bg-secondary-color" id="footer">
+    <div class="container">
+      <div class="row">
+        <!--FOOTER TOP-->
+        
+        <!-- footer details -->
+        <div class="col-12" id="footer-details">
+          <div class="row">
+            <div class="col-12 col-md-4" id="news-container">
+              <div class="col-12" id="footer-top">
+                <div class="col-4 img-fluid "><img src="~/img/logoEquipeBranco.png" alt="Logo Tech Work" class="logoFooter"></div>                    
+            </div>
+    
+              <p class="primary-color">
+                Digite seu E-mail para receber noticias
+              </p>
+              <form>
+                <div class="mb3 mt-4">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Digite seu E-mail"
+                  />
+                </div>
+                <button class="btn btn-dark mt-4" type="submit">Enviar</button>
+              </form>
+            </div>
+            <div class="col-12 col-md-4 justify-content-center" id="contact-container">
+              <h4>Redes Sociais / Contato</h4>
+              <div class="col-8" id="social-icons">
+                <i class="bi bi-facebook"></i>
+                <i class="bi bi-instagram"></i>
+                <i class="bi bi-youtube"></i>
+                <i class="bi bi-twitter"></i>
+                
+              </div>
+            </div>
             
-                    <p class="primary-color">
-                        Digite seu E-mail para receber noticias
-                    </p>
-                    <form>
-                        <div class="mb3 mt-4">
-                        <input
-                            type="email"
-                            class="form-control"
-                            placeholder="Digite seu E-mail"
-                        />
-                        </div>
-                        <button class="btn btn-dark mt-4" type="submit">Enviar</button>
-                    </form>
-                    </div>
-                    <div class="col-12 col-md-4 justify-content-center" id="contact-container">
-                    <h4>Redes Sociais / Contato</h4>
-                    <div class="col-8" id="social-icons">
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-instagram"></i>
-                        <i class="bi bi-youtube"></i>
-                        <i class="bi bi-twitter"></i>
-                        
-                    </div>
-                    </div>
-                    
-                    <div class="col-12 col-md-4" id="links-container">
-                    <div class="row">
-                        <h4>Voce pode estar procurando por:</h4>
-                        <div class="col-6">
-                        <ul class="listunstyled">
-                            <li><a href="#" class="primary-color">Projetos</a></li>
-                            <li>
-                            <a href="#" class="primary-color">Contibua</a>
-                            </li>
-                            <li><a href="#" class="primary-color">Sobre nós</a></li>
-                        </ul>
-                        </div>
-                        <div class="col-6">
-                        <ul class="listunstyled">
-                            <li><a href="#" class="primary-color">Missão</a></li>
-                            <li><a href="#" class="primary-color">Visão</a></li>
-                            <li><a href="#" class="primary-color">Valores</a></li>
-                        </ul>
-                        </div>
-                    </div>
-                    </div>
+            <div class="col-12 col-md-4" id="links-container">
+              <div class="row">
+                <h4>Voce pode estar procurando por:</h4>
+                <div class="col-6">
+                  <ul class="listunstyled">
+                    <li><a href="#" class="primary-color">Projetos</a></li>
+                    <li>
+                      <a href="#" class="primary-color">Contibua</a>
+                    </li>
+                    <li><a href="#" class="primary-color">Sobre nós</a></li>
+                  </ul>
                 </div>
+                <div class="col-6">
+                  <ul class="listunstyled">
+                    <li><a href="#" class="primary-color">Missão</a></li>
+                    <li><a href="#" class="primary-color">Visão</a></li>
+                    <li><a href="#" class="primary-color">Valores</a></li>
+                  </ul>
                 </div>
-                <!-- footer bottom -->
-                <div class="col-12" id="footer-bottom">
-                <div class="row justify-content-between">
-                    <div class="col-12 col-md-3">
-                    <p class="secondary-color">TECH WORK &copy; 2022</p>
-                    </div>
-                    <div class="col-12 col-md-3">
-                    <p class="secondary-color">
-                        Obrigado a Todos
-                    </p>
-                    </div>
-                </div>
-                </div>
+              </div>
             </div>
+          </div>
+        </div>
+        <!-- footer bottom -->
+        <div class="col-12" id="footer-bottom">
+          <div class="row justify-content-between">
+            <div class="col-12 col-md-3">
+              <p class="secondary-color">TECH WORK &copy; 2022</p>
             </div>
-    </footer> *@
+            <div class="col-12 col-md-3">
+              <p class="secondary-color">
+                Obrigado a Todos
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/jquery.mask.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

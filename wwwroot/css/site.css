@@ -2,11 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
 
-.teste{
-  height: 70px;
-}
 * {
     font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 .color4 {
@@ -26,7 +25,7 @@
 }
 
 .bg-secondary-color {
-    background-color: #000000;
+    background-color: #212529;
 }
 
 .bg-white-color {
@@ -160,20 +159,6 @@ ul.dropdown-menu {
     border-radius: 1;
 }
 
-.carousel-caption-prev i,
-.carousel-caption-next i {
-    color: #111;
-    font-size: 3em;
-}
-
-.carousel-indicators [data-bs-target] {
-    background-color: #666;
-    opacity: 0.8;
-}
-
-.carousel-indicators .active {
-    background-color: #111;
-}
 
 
 @media(min-width: 768px) {
@@ -249,6 +234,7 @@ ul.dropdown-menu {
 }
 
 #social-icons i{
+    color: #f7f7f7;
     margin-right: 1em;
     font-size: 1.5em;
     cursor: pointer;
@@ -256,7 +242,7 @@ ul.dropdown-menu {
 }
 
 #social-icons i:hover{
-    color: #7a7a7a;
+    color: #f7f7f7;
 }
 
 /* footeer details */
@@ -290,9 +276,6 @@ ul.dropdown-menu {
     text-decoration: none;
 }
 
-#links-container a:hover{
-    color: rgb(39, 39, 39);
-}
 
 /* footer bottom */
 #footer-bottom{
@@ -359,7 +342,7 @@ a{
 } 
 
 a:hover{
-    color: #212529;
+    color: white;
 }
 
 #funcionalidades a.destaque{
@@ -396,6 +379,31 @@ a:hover{
 
 
 /* responsive media */
+@media(min-width: 767.98px){
+    #funcionalidades a.destaque .img-container{
+        height: 120px;
+    }
+
+    #funcionalidades a.destaque .img-container img{
+        max-height: 120px;
+    }
+}
+
+@media(min-width : 992px){
+    #container-img .img-container img{
+        max-height: 200px;
+    }
+    #container-img .row{
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
+}
+
+
+
 @media(max-width: 767.98px){
     #funcionalidades a.destaque .img-container{
         height: 120px;
@@ -404,4 +412,17 @@ a:hover{
     #funcionalidades a.destaque .img-container img{
         max-height: 120px;
     }
+}
+
+@media(max-width : 992px){
+    #container-img .img-container img{
+        max-height: 200px;
+    }
+    #container-img .row{
+        align-items: center;
+        justify-content: center;
+    }
+
+    
+
 }

@@ -18,6 +18,17 @@ public class HomeController : Controller
     {
         return View();
     }
+    [HttpGet]
+    public IActionResult Projeto()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult QuemSomos()
+    {
+        return View();
+    }
 
     public IActionResult Privacy()
     {

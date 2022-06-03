@@ -263,6 +263,12 @@ namespace TiAchei_Tcc.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("UrlFacebook")
+                        .HasColumnType("VARCHAR(150)");
+
+                    b.Property<string>("UrlInstagram")
+                        .HasColumnType("VARCHAR(150)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(256)

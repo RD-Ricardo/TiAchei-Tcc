@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Services;
 using TiAchei_Tcc.ViewModel;
@@ -32,6 +33,8 @@ namespace TiAchei_Tcc.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            if(!ModelState.IsValid) return View(model);
+
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             if(user != null)
@@ -40,45 +43,64 @@ namespace TiAchei_Tcc.Controllers
 
                 if(result.Succeeded)
                 {   
-                    return RedirectToAction("Index","Painel");
+                    if(string.IsNullOrEmpty(model.ReturnUrl))
+                    {
+                        return RedirectToAction("Index","Painel");
+                    }
+                    return Redirect(model.ReturnUrl);
                 }
                 else
                 {
-                    ViewData["Error"] = "Deu Erro no login";
-                    return View(ViewData);
+                    ModelState.AddModelError("Senha","Senha incorreta");
+                    return View(model);
                 }
             }
-            else
-            {
-                ModelState.AddModelError("","");
-                return View(model);
-            }
+            ModelState.AddModelError("","Usuario não encontrado");
+            return View(model);
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult Cadastrar()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel  model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Cadastrar(RegisterViewModel  model)
         {
-            
-
-            var user = new User()
+            if(ModelState.IsValid)
             {
-                Email = model.Email, 
-                UserName = model.Nome,
-                FotoUrl = _serviceUpload.UploadFile(model)
-            };
-            var result = await _userManager.CreateAsync(user, model.Senha);
+                var user = new User()
+                {
+                    Email = model.Email, 
+                    UserName = model.Nome,
+                    PhoneNumber = model.Telefone,
+                    UrlFacebook = model.UrlFacebook,
+                    UrlInstagram = model.UrlInstagram,
+                    FotoUrl = _serviceUpload.UploadFile(model)
+                };
+                
+                var result = await _userManager.CreateAsync(user, model.Senha);
 
-            if(result.Succeeded)
-            {
-                return RedirectToAction("Index","Painel");
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("Index","Painel");
+                }
+                else
+                {
+                    this.ModelState.AddModelError("Cadastra", "Falha ao cadastrar usuário.");
+                }
             }
-            return RedirectToAction("Index","Home");
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signManager.SignOutAsync();
+            return  RedirectToAction("Index","Home");
         }
     }
 }

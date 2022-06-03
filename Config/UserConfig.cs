@@ -10,6 +10,8 @@ namespace TiAchei_Tcc.Config
         {
             builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.UserName).IsRequired();
+            builder.Property(x => x.UrlFacebook).HasColumnType("VARCHAR(150)");
+            builder.Property(x => x.UrlInstagram).HasColumnType("VARCHAR(150)");
         }
     }
 }

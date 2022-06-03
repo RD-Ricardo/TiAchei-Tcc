@@ -51,24 +51,19 @@ namespace TiAchei_Tcc.Controllers
         [HttpDelete]
         public async Task<IActionResult> Deletar(string id)
         {   
-            var model = await _repository.DeletarPet(id);
-            if(model)
-            {
-                return Ok();
-            }
-            else{
-                return BadRequest();
-            }
+            var model = await _repository.DeletePet(id);
+            if(model) return Ok();
+            else return BadRequest();
         }
 
         [HttpGet]
-        public IActionResult Registro()
+        public IActionResult CadastrarPet()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registro(PetViewModel model)
+        public async Task<IActionResult> CadastrarPet(PetViewModel model)
         {
             var userCurrent = await _userManager.GetUserAsync(User);
     
@@ -82,18 +77,21 @@ namespace TiAchei_Tcc.Controllers
                 Tipo = model.Tipo,
                 Descricao = model.Descricao 
             };
-            
             await _repository.CreatePet(petCurrent);
             return RedirectToAction("Index","Painel");             
         }
-
         [HttpGet]
-        public IActionResult Qrcode(string id)
+        public async Task<IActionResult> Editar(string id)
+        {   var model = await  _repository.GetBydId(id);
+           return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Editar([FromForm]Pet model)
         {
-            var url = HttpContext.Request.Host.Value;
-            ViewBag.HostUrl =  url;
-            ViewBag.Id =  id;
-            return View();
+            var userCurrent = await _userManager.GetUserAsync(User);
+            model.UserId = userCurrent.Id;
+            if(!await _repository.Update(model)) return BadRequest("Deu erro o loko");
+            return RedirectToAction("Index", "Painel");
         }
     }
 }
