@@ -85,11 +85,13 @@ namespace TiAchei_Tcc.Controllers
 
                 if(result.Succeeded)
                 {
+                    await _signManager.SignInAsync(user, true);
                     return RedirectToAction("Index","Painel");
                 }
                 else
                 {
                     this.ModelState.AddModelError("Cadastra", "Falha ao cadastrar usuário.");
+                    return View(model);
                 }
             }
             return View(model);
