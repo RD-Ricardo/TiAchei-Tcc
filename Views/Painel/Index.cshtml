@@ -1,15 +1,16 @@
 @model PainelViewModel
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 mt-3" style="height: 80vh;">
-            <div class="d-grid gap-2 mb-4">
-                <a asp-action="CadastrarPet" asp-controller="Painel" class="btn btn-outline-secondary">ADICIONAR&nbsp;&nbsp;&nbsp;<i class="ml-3 bi bi-plus-circle"></i></a>
-            </div>
-            @{
+
+<link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+<div class="container-conteudo">
+    <div class="row-conteudo">
+        <div class="d-grid gap-2 mb-4">
+            <a asp-action="CadastrarPet" asp-controller="Painel" class="btn btn-outline-secondary">ADICIONAR&nbsp;&nbsp;&nbsp;<i class="ml-3 bi bi-plus-circle"></i></a>
+        </div
+        <div class="conteudo">
+             @{
                 if(@Model.Pets.ToList().Count > 0)
                 {
-                    <div class="row d-flex justify-content-start mb-3 mt-1">
-                        <div class="row">
+                   
                             <div class="col-md-4">
                                     <div class="alert alert-primary" role="alert">
                                         <i class="bi bi-shield-shaded"></i> Total de Pets: <strong>@Model.Pets.ToList().Count</strong> 
@@ -43,52 +44,7 @@
                                     </div>
                                 }
                             </div>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Foto</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Data Criação</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Funçoes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Pets)
-                            {
-                                <tr>
-                                    <td>
-                                        <img class="border rounded-circle"  src="~/ImgPets/@Html.DisplayFor(modelItem => item.Foto)" width="50">
-                                    </td>
-                                    <td> @Html.DisplayFor(modelItem => item.Nome)</td>
-                                    <td>
-                                        @if(item.Perdido == true)
-                                        {
-                                            <span class="badge bg-danger">desaparecido</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-success">encontrado</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DataCricao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Tipo)
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-primary search" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-placement="top" title="Vizualizar"><i class="bi bi-eye"></i></button>
-                                        <a href="@Url.Action("Editar", "Painel", new { id = item.Id })" data-id="@Html.DisplayFor(modelItem => item.Id)"  class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top"><i class="bi bi-pencil"></i></a>
-                                        <button type="button" class="btn btn-outline-danger deletar" data-id="@Html.DisplayFor(modelItem => item.Id)" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-archive"></i></button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                   
                 }
                 else
                 {
@@ -98,139 +54,9 @@
                 }
             }
         </div>
-        <div class="col-md-4">
-            <div class="row card d-flex p-2"  style="height: 90vh;">
-                <div class="col-12 d-flex flex-column h-100 p-1">
-                    <h5 class="text-center mt-3 mb-4">INFORMAÇÕES</h5>
-                    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-                        <div class="mt-1 mb-4 col-12 d-flex justify-content-center rounded-circle">
-                            @if(string.IsNullOrEmpty(@Model.Usuario.FotoUrl))
-                            {
-                                <img class="border rounded-circle"  src="~/img/usuario.jpg" width="150" height="150">
-                            }
-                            else
-                            {
-                                <img class="border rounded-circle"  src="~/Imagens/@Model.Usuario.FotoUrl" width="150" height="150">
-                            }
-                        </div>
-                        <div class="col-12">
-                            <ul class="d-flex flex-column align-items-start">
-                               
-                                <li class="list-group-item">Nome: @Model.Usuario.UserName</li>
-                                
-                                @if(!string.IsNullOrWhiteSpace(@Model.Usuario.PhoneNumber))
-                                    {
-                                        <li class="list-group-item mt-3 ">Telefone <span>@Model.Usuario.PhoneNumber</span></li>
-                                    }
-                                    <li class="list-group-item mt-3">Email: <span>@Model.Usuario.Email</span></li>
-                                    @{
-                                        @if(!string.IsNullOrEmpty(@Model.Usuario.UrlFacebook))
-                                        {
-                                            <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#1298f6;"><a href="@Model.Usuario.UrlFacebook" target="_blank" class="nav-link text-white"><i class="bi bi-facebook">&nbsp;&nbsp;Facebook</i></a></li>
-                                        }
-                                        @if(!string.IsNullOrEmpty(@Model.Usuario.UrlInstagram))
-                                        {
-                                            <li class="list-group-item mt-4 w-100 d-flex justify-content-center border rounded" style="background-color:#c25c67;"><a href="@Model.Usuario.UrlInstagram" target="_blank" class="nav-link text-white"><i class="bi bi-instagram">&nbsp;&nbsp;Instagram</i></a></li> 
-                                        }
-                                        @if(!string.IsNullOrEmpty(@Model.Usuario.PhoneNumber))
-                                        {
-                                            <li class="list-group-item mt-4  w-100 d-flex justify-content-center border rounded" style="background-color:#128c7f;"><a href="https://api.whatsapp.com/send?1=pt_BR&phone=@Model.Usuario.PhoneNumber"  target="_blank" class="nav-link text-white"><i class="bi bi-whatsapp mr-4">&nbsp;&nbsp;WhastApp</i></a></li>
-                                            
-                                        }
-                                    }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="navegacao">
+            <partial name="_Navegacao" ></partial>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <h6 class="text-center">Deseja excluir mesmo esse Pet?</h6>
-        <div class="d-flex justify-content-center p-2">
-            <button type="button" class="btn btn-success sim">Sim</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">INFORMAÇÕES SOBRE O PET</h5>
-        <input type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"/>
-      </div>
-      <div class="modal-body update">
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-    const btn  = document.querySelectorAll('.search');
-    const btnFechar  = document.querySelector('.close');
-    const btnUpdate  = document.querySelector('.close');
-    let modal = document.querySelector('.update');
-    btn.forEach(x => x.addEventListener('click', async ()=>{
-        const local = window.location.host;
-        const id = x.getAttribute('data-id');
-        const url = `https://${local}/painel/buscar/${id}`;
-        let response  = await fetch(url)
-        if(response.ok){
-            let result = await response.json();
-            console.log(result);
-            modal.insertAdjacentHTML('beforeend', 
-            `
-                <div class="row p-2">
-                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
-                        <img class="border rounded-circle" src="https://${local}/ImgPets/${result.foto}" width="120" height="120">
-                        <input class="form-control mt-2" type="text" value="Nome: ${result.nome}" aria-label="Disabled input example" disabled><br>
-                        <input type="text" class="form-control" id="raca" value="Raça: ${result.raca}" disabled><br>
-                        <textarea class="form-control" id="descricao"  cols="30" rows="5" disabled>Descrição: ${result.descricao}</textarea><br>
-                    </div>
-                    <div class="col-12">
-                        <div class="card d-flex justify-content-center align-items-center">
-                            <img src="https://localhost:7239/ImgQrCode/5319ef9e-6162-4d69-822e-a8689d8dc10e" width="200">
-                            <div class="d-grid gap-2 w-100 p-1">
-                                <a href="https://${local}/Card/Perfil/${id}" class="btn btn-primary" type="button">Ver QR Coder</a>
-                                <a href="https://${local}/ImgQrCode/${id}" class="btn btn-success" download="" type="button">Baixar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>    
-            `);
-        }
-    }))
-    
-
-    btnFechar.addEventListener('click', ()=>{
-        modal.innerHTML = "";
-    });
-
-
-    const btnDeletar = document.querySelectorAll('.deletar');
-    const btnSim = document.querySelector('.sim');
-    btnDeletar.forEach(x => x.addEventListener('click', ()=>{
-        const localDeletar = window.location.host;
-        const idDeletar = x.getAttribute('data-id');
-        btnSim.addEventListener('click', async ()=>{
-            console.log(idDeletar);
-            const urlNova = `https://${localDeletar}/painel/deletar/${idDeletar}`;
-            let response  = await fetch(urlNova,{ method:"DELETE" });
-             if(response.ok){
-                window.location.reload();
-            }  
-        });
-    }))   
-</script>
