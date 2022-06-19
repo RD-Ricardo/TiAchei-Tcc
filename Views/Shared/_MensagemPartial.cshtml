@@ -1,0 +1,26 @@
+@if (TempData.ContainsKey("mensagem"))
+{
+    var mensagem = MensagemViewModel.Desserializar(TempData["mensagem"].ToString());
+    @if (mensagem.Tipo == TipoMensagem.Erro)
+    {
+        <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert">
+            @Html.Raw(mensagem.Texto)
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    else if(mensagem.Tipo == TipoMensagem.Sucesso)
+    {
+        
+        <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+            @Html.Raw(mensagem.Texto)
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-3 alert-dismissible fade show" role="alert">
+            @Html.Raw(mensagem.Texto)
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+}

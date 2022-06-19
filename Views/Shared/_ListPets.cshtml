@@ -1,29 +1,63 @@
 @model Pet
-
 <tr>
-                                    <td>
-                                        <img class="border rounded-circle"  src="~/ImgPets/@Html.DisplayFor(modelItem => @Model.Foto)" width="50">
-                                    </td>
-                                    <td> @Html.DisplayFor(modelItem => @Model.Nome)</td>
-                                    <td>
-                                        @if(@Model.Perdido == true)
-                                        {
-                                            <span class="badge bg-danger">desaparecido</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-success">encontrado</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelModel => @Model.DataCricao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelModel => @Model.Tipo)
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline-primary search" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-placement="top" title="Vizualizar"><i class="bi bi-eye"></i></button>
-                                        <a href="@Url.Action("Editar", "Painel", new { id = @Model.Id })" data-id="@Html.DisplayFor(modelModel => @Model.Id)"  class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top"><i class="bi bi-pencil"></i></a>
-                                        <button type="button" class="btn btn-outline-danger deletar" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-archive"></i></button>
-                                    </td>
-                                </tr>
+    <td>
+        <img class="border rounded-circle"  src="~/ImgPets/@Html.DisplayFor(modelItem => @Model.Foto)" width="50">
+    </td>
+    <td data-label="Nome:"> @Html.DisplayFor(modelItem => @Model.Nome)</td>
+    <td data-label="Status:">
+        @if(@Model.Perdido == true)
+        {
+            <span class="badge bg-danger">desaparecido</span>
+        }
+        else
+        {
+            <span class="badge bg-success">encontrado</span>
+        }
+    </td>
+    <td data-label="Data Criação:">
+        @Html.DisplayFor(modelModel => @Model.DataCricao)
+    </td>
+    <td data-label="Categoria:">
+        @Html.DisplayFor(modelModel => @Model.Tipo)
+    </td>
+    <td>
+        <button type="button" class="btn btn-outline-primary search" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-placement="top" title="Vizualizar"><i class="bi bi-eye"></i></button>
+        <a href="@Url.Action("Editar", "Painel", new { id = @Model.Id })" data-id="@Html.DisplayFor(modelModel => @Model.Id)"  class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top"><i class="bi bi-pencil"></i></a>
+        <button type="button" class="btn btn-outline-danger deletar" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-archive"></i></button>
+    </td>
+</tr>
+
+
+
+<!--Modal de Excluir-->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">EXCLUIR PET</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center">Deseja excluir mesmo este Pet?</h6>
+        <div class="d-flex justify-content-center p-2">
+            <button type="button" class="btn btn-success sim">Sim</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de informações -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">INFORMAÇÕES SOBRE O PET</h5>
+        <input type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"/>
+      </div>
+      <div class="modal-body update">
+      </div>
+    </div>
+  </div>
+</div>

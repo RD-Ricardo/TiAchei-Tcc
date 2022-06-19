@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using TiAchei_Tcc.Extensions;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Repository.Interfaces;
 using TiAchei_Tcc.Services;
@@ -12,8 +13,6 @@ using TiAchei_Tcc.ViewModel;
 namespace TiAchei_Tcc.Controllers
 {
     [Authorize]
-    // [Controller]
-    // [Route("[controller]")]
     public class PainelController: Controller
     {   
         private readonly IPetRepository _repository;
@@ -78,7 +77,8 @@ namespace TiAchei_Tcc.Controllers
                 Descricao = model.Descricao 
             };
             await _repository.CreatePet(petCurrent);
-            return RedirectToAction("Index","Painel");             
+            this.MostrarMensagem("Pet Cadastrado com sucesso", TipoMensagem.Sucesso);
+            return RedirectToAction("CadastrarPet");             
         }
         [HttpGet]
         public async Task<IActionResult> Editar(string id)
@@ -93,5 +93,19 @@ namespace TiAchei_Tcc.Controllers
             if(!await _repository.Update(model)) return BadRequest("Deu erro o loko");
             return RedirectToAction("Index", "Painel");
         }
+
+        [HttpGet]
+        public IActionResult Pessoas() => View();
+        
+        [HttpGet]
+        public IActionResult Objetos() => View();
+
+        [HttpGet]
+        public async Task<IActionResult> Config()
+        {   
+            User model = await _userManager.GetUserAsync(User);
+            return  View(model);
+        }
+    
     }
 }

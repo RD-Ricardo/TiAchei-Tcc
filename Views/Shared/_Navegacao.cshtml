@@ -1,25 +1,37 @@
+@model User
 <link rel="stylesheet" href="~/css/navegacao.css" asp-append-version="true" />
 <div class="conteudo-navegacao">
+    <div class="img-user">
+        <img src="~/Imagens/@Model.FotoUrl"  width="100">
+        <span class="mt-4 fw-bold">Bem-vindo @Model.UserName !!</span>
+    </div>  
     <ul class="list-navegacao">
         <li class="item-navegacao">
-            <a  class="link-navegacao" href="">
+            <a asp-controller="Painel" asp-action="Index"  class="link-navegacao">
                 <i class='bx bxs-dog'></i>
+                <span class="text-navegacao">Pets</span>
             </a>
         </li>
         <li class="item-navegacao">
-            <a  class="link-navegacao" href="">
+            <a asp-controller="Painel" asp-action="Pessoas" class="link-navegacao">
                 <i class='bx bx-user-pin'></i>
+                <span class="text-navegacao">Pessoas</span>
             </a>
         </li>
         <li class="item-navegacao">
-            <a  class="link-navegacao" href="">
+            <a asp-controller="Painel" asp-action="Objetos" class="link-navegacao" >
                 <i class='bx bx-mobile-alt' ></i>
+                <span class="text-navegacao">Objetos</span>
             </a>
         </li>
         <li class="item-navegacao">
-            <a  class="link-navegacao" href="">
+            <a asp-controller="Painel" asp-action="Config"  class="link-navegacao">
                 <i class='bx bx-cog'></i>
+                <span class="text-navegacao">Config</span>
             </a>
         </li>
     </ul>
+    <form asp-action="Logout" asp-controller="User" method="POST">
+        <input class="bt" type="submit" value="Logout">                            
+    </form>
 </div>

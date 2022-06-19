@@ -8,29 +8,128 @@
 }
 .row-conteudo{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100vh;
-    margin-top: 10px;
 }
 
 .navegacao{
     width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-shadow: -3px 0px 21px 4px #eee; 
+    box-shadow: -3px 0px 21px 4px #eee;
 }
 .conteudo{
     width: 85%;
+    padding: 1%;
+}
+
+.text-navegacao{
+    font-size: 27px;
+    text-decoration: none;
+    color: #5e5757;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.link-navegacao{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0px 0px 2px 0px rgba(194, 194, 194, 0.66);
+}
+.conteudo-navegacao{
+    width: 100%
+}
+.list-navegacao{
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+}
+.link-navegacao i{
+    color: #5e5757;
+    font-size: 54px;
+}
+.item-navegacao{
+    width: 100%;
+    border-radius: 10px;
+}
+.link-navegacao:hover{
+    box-shadow: 0px 0px 2px 0px rgba(185, 185, 185, 0.66);
+    color: red;
+    background-color: rgb(247, 247, 247);
+}
+
+.img-user{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.btn-logout{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+.bt {
+	box-shadow: 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	cursor:pointer;
+	color:#212529;
+	font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+    width: 100px;
+    height: 28px;
+}
+.conteudo-teste{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.conteudo-info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.card-info{ 
+    padding: 10px 6px 10px 0px;
+    width: 33.3%;
+}
+.ds{
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media screen and (max-width: 767px) {
     .row-conteudo{
-        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .teste-btn{
+        width: 100%;
+        padding: 30px  20px 0px 20px;
     }
     .conteudo{
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: column;
         width: 100%;
-        padding: 20px;
+        padding: 0;
     }
     .navegacao{
         display: flex;
@@ -39,7 +138,8 @@
         bottom: 1%;
         width: 100%;
         height: 89px;
-        padding: 10px;
+        border: none;
+        box-shadow: none;
     }
     .conteudo-navegacao{
         display: flex;
@@ -68,6 +168,7 @@
         list-style: none;
         color: black;
         height: 100%;
+        margin: 0;
     }
     .link-navegacao{
         display: flex;
@@ -76,10 +177,79 @@
         text-align: center;
         text-decoration: none;
         padding: 22px 22px;
+        box-shadow: none;
     }
 
     .link-navegacao i{
         font-size: 30px;
         color: #b5b5b5;
     }
+    .text-navegacao{
+        display: none;
+    }
+    .img-user{
+        display: none;
+    }
+    .conteudo-teste{
+        display: flex;
+        flex-direction: column;
+        padding: 5%;
+    }
+    .conteudo-info{
+        display: flex;
+        flex-direction: column;
+    }
+    .card-info{
+        width: 100%;
+        padding: 1px;
+    }
+    .btn-logout{
+        display: none;
+    }
+    table{
+        overflow-x: auto;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        display: none;
+        width: 1px;
+      }
+      
+      table tr {
+        border: 1px solid rgb(218, 218, 218);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+      
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        font-size: .8em;
+        text-align: left;
+      }
+      
+      table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: lowercase;
+        padding-left:  1px; 
+        padding-right: 10px;
+        
+      }
+      
+      table td:last-child {
+        border-bottom: 0;
+      }
+
+      .img-ds{
+          width: 100%;
+      }
+  
+
 }

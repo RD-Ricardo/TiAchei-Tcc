@@ -1,0 +1,49 @@
+@model User
+<div class="container-conteudo">
+    <div class="row-conteudo">
+        <div class="conteudo ">
+             <div class=" p-3">
+                 <div class= "card p-4">
+                    <div class="mb-3 d-flex justify-content-center">
+                        <img src="~/img/usuario.jpg" alt="dsada" width="100">
+                    </div>
+                 <div>
+                    <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Nome</label>
+                        <input  asp-for="@Model.UserName" type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Telefone</label>
+                        <input asp-for="@Model.PhoneNumber" class="form-control" id="inputPassword4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" disabled>
+                    </div>
+                    <div class="col-12">
+                        <label for="formFile" class="form-label"></label>Foto</label>
+                        <input class="form-control" type="file" id="formFile">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">Facebook</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">Instagram</label>
+                        <input type="text" class="form-control" id="inputCity">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-primary">Atualizar Informações</button>
+                    </div>
+                    </form> 
+                 </div> 
+                 </div>
+              
+             </div>
+        </div>
+        <div class="navegacao">
+            <partial name="_Navegacao" ></partial>
+        </div>
+    </div>
+</div>
