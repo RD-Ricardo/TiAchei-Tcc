@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using TiAchei_Tcc.Enums;
 
 namespace TiAchei_Tcc.Models
 {
@@ -11,10 +10,12 @@ namespace TiAchei_Tcc.Models
         public string  Raca { get; set; }
         public string  Foto { get; set; }
         public bool Perdido { get; set; }
-        public Tipo Tipo { get; set; }
+        
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime DataCricao { get; set; } = DateTime.Now;
         public string  Descricao { get; set; }
+        public int CategoriaPetId { get; set; }
+        public CategoriaPet Categoria { get; set; }
         public string  UserId { get; set; }
         public User Usuario { get; set; }
     }

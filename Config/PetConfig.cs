@@ -12,7 +12,7 @@ namespace TiAchei_Tcc.Config
             builder.Property(x => x.Nome).HasColumnType("VARCHAR(30)").IsRequired();
             builder.Property(x => x.Raca).HasColumnType("VARCHAR(30)").IsRequired();
             builder.Property(x => x.Foto).HasColumnType("VARCHAR(250)");
-            builder.Property(x => x.Tipo).IsRequired();
+            builder.Property(x => x.CategoriaPetId).IsRequired();
             builder.Property(x => x.UserId).IsRequired();
         }
     }

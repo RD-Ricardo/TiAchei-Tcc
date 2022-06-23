@@ -27,40 +27,35 @@ namespace TiAchei_Tcc.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
-        {  
-            var userCurrent = await _userManager.GetUserAsync(User); 
-            
-            var resultPets = await _repository.GetAllPetsUserCurrent(userCurrent);
-
-            var viewModel = new PainelViewModel()
-            {
-                Pets = resultPets,
-                Usuario = userCurrent
-            };
-
-            return View(viewModel);
-        }
+        public async Task<IActionResult> Buscar(string id) => Json(await _repository.GetBydId(id));
+    
         [HttpGet]
-        public async Task<IActionResult> Buscar(string id)
-        {   
-            var model = await _repository.GetBydId(id);
-            return Json(model);
-        }
+        public async Task<IActionResult> Pessoas() => View(await _userManager.GetUserAsync(User));
+        
+        [HttpGet]
+        public async Task<IActionResult> Objetos() => View(await _userManager.GetUserAsync(User));
+
+        [HttpGet]
+        public  async Task<IActionResult> CadastrarPet() => View(await _userManager.GetUserAsync(User));
+        [HttpGet]
+        public  async Task<IActionResult> CadastrarPessoa() => View(await _userManager.GetUserAsync(User));
+
+        [HttpGet]
+        public async Task<IActionResult> Config() => View(await _userManager.GetUserAsync(User));
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(string id) => View(await  _repository.GetBydId(id));
         [HttpDelete]
-        public async Task<IActionResult> Deletar(string id)
-        {   
-            var model = await _repository.DeletePet(id);
-            if(model) return Ok();
-            else return BadRequest();
-        }
-
+        public async Task<IActionResult> Deletar(string id) => await _repository.DeletePet(id) ? Ok() : BadRequest();
+        
         [HttpGet]
-        public IActionResult CadastrarPet()
-        {
-            return View();
-        }
-
+        public async Task<IActionResult> Index() 
+            => View(new PainelViewModel() 
+            {
+                Pets = await _repository.GetAllPetsUserCurrent(await _userManager.GetUserAsync(User)),
+                Usuario = await _userManager.GetUserAsync(User)
+            });
+            
         [HttpPost]
         public async Task<IActionResult> CadastrarPet(PetViewModel model)
         {
@@ -73,38 +68,23 @@ namespace TiAchei_Tcc.Controllers
                 Foto = _serviceUpload.UploadFilePet(model),
                 Perdido = false,
                 UserId = userCurrent.Id,
-                Tipo = model.Tipo,
                 Descricao = model.Descricao 
             };
             await _repository.CreatePet(petCurrent);
             this.MostrarMensagem("Pet Cadastrado com sucesso", TipoMensagem.Sucesso);
             return RedirectToAction("CadastrarPet");             
         }
-        [HttpGet]
-        public async Task<IActionResult> Editar(string id)
-        {   var model = await  _repository.GetBydId(id);
-           return View(model);
-        }
+
+        
+        
+        
         [HttpPost]
         public async Task<IActionResult> Editar([FromForm]Pet model)
         {
             var userCurrent = await _userManager.GetUserAsync(User);
             model.UserId = userCurrent.Id;
-            if(!await _repository.Update(model)) return BadRequest("Deu erro o loko");
+            if(!await _repository.Update(model)) return BadRequest();
             return RedirectToAction("Index", "Painel");
-        }
-
-        [HttpGet]
-        public IActionResult Pessoas() => View();
-        
-        [HttpGet]
-        public IActionResult Objetos() => View();
-
-        [HttpGet]
-        public async Task<IActionResult> Config()
-        {   
-            User model = await _userManager.GetUserAsync(User);
-            return  View(model);
         }
     
     }

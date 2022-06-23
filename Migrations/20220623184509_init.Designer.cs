@@ -11,7 +11,7 @@ using TiAchei_Tcc.Db;
 namespace TiAchei_Tcc.Migrations
 {
     [DbContext(typeof(AppDbContextMysql))]
-    [Migration("20220619172653_init")]
+    [Migration("20220623184509_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -149,16 +149,93 @@ namespace TiAchei_Tcc.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPessoa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CategoriaPesosas");
+                });
+
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CategoriaPets");
+                });
+
+            modelBuilder.Entity("TiAchei_Tcc.Models.Pessoa", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int?>("CategoriaPessoaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Idade")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Perdida")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaPessoaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Pessoas");
+                });
+
             modelBuilder.Entity("TiAchei_Tcc.Models.Pet", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<int>("CategoriaPetId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DataCricao")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("VARCHAR(100)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Foto")
                         .HasColumnType("VARCHAR(250)");
@@ -174,14 +251,13 @@ namespace TiAchei_Tcc.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(30)");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaPetId");
 
                     b.HasIndex("UserId");
 
@@ -339,13 +415,54 @@ namespace TiAchei_Tcc.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPessoa", b =>
+                {
+                    b.HasOne("TiAchei_Tcc.Models.User", "Usuario")
+                        .WithMany("CategoriaPessoa")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPet", b =>
+                {
+                    b.HasOne("TiAchei_Tcc.Models.User", "Usuario")
+                        .WithMany("CategoriPet")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("TiAchei_Tcc.Models.Pessoa", b =>
+                {
+                    b.HasOne("TiAchei_Tcc.Models.CategoriaPessoa", null)
+                        .WithMany("Pessoas")
+                        .HasForeignKey("CategoriaPessoaId");
+
+                    b.HasOne("TiAchei_Tcc.Models.User", null)
+                        .WithMany("Pessoas")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("TiAchei_Tcc.Models.Pet", b =>
                 {
+                    b.HasOne("TiAchei_Tcc.Models.CategoriaPet", "Categoria")
+                        .WithMany("Pets")
+                        .HasForeignKey("CategoriaPetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TiAchei_Tcc.Models.User", "Usuario")
                         .WithMany("Pets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Categoria");
 
                     b.Navigation("Usuario");
                 });
@@ -361,8 +478,24 @@ namespace TiAchei_Tcc.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPessoa", b =>
+                {
+                    b.Navigation("Pessoas");
+                });
+
+            modelBuilder.Entity("TiAchei_Tcc.Models.CategoriaPet", b =>
+                {
+                    b.Navigation("Pets");
+                });
+
             modelBuilder.Entity("TiAchei_Tcc.Models.User", b =>
                 {
+                    b.Navigation("CategoriPet");
+
+                    b.Navigation("CategoriaPessoa");
+
+                    b.Navigation("Pessoas");
+
                     b.Navigation("Pets");
 
                     b.Navigation("RedesSocial");
