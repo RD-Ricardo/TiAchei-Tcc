@@ -22,11 +22,9 @@
                     <input asp-for="@Model.Perdido" >
                     <span asp-validation-for="@Model.Perdido" class="text-danger"></span>
                 </div>
-                @* <div class="col-12 mt-3">
-                     <select class="form-select" asp-for="@Model.Tipo" asp-items="Html.GetEnumSelectList<Tipo>()">
-                            <option> Selecione</option>
-                    </select>
-                </div> *@
+                   <div class="col-12 mt-3">
+                    <select asp-for="@Model.CategoriaPetId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                </div>
                 <div class="col-12">
                     <div class="content3 mt-4">
                         <textarea name="Descricao" id="" cols="30" rows="5" asp-for="@Model.Descricao"></textarea>

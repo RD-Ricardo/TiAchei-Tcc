@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using TiAchei_Tcc.Extensions;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Services;
 using TiAchei_Tcc.ViewModel;
@@ -24,11 +25,10 @@ namespace TiAchei_Tcc.Controllers
 
         [HttpGet]
         public IActionResult Login(string retrunUrl)
-        {
-            return View(new LoginViewModel(){
+            => View(new LoginViewModel(){
                 ReturnUrl = retrunUrl
             });
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -60,15 +60,15 @@ namespace TiAchei_Tcc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Cadastrar()
-        {
-            return View();
-        }
+        public IActionResult Cadastrar() => View();
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Cadastrar(RegisterViewModel  model)
-        {
+        {   
+           
+
             if(ModelState.IsValid)
             {
                 var user = new User()
@@ -81,6 +81,7 @@ namespace TiAchei_Tcc.Controllers
                     FotoUrl = _serviceUpload.UploadFile(model)
                 };
                 
+
                 var result = await _userManager.CreateAsync(user, model.Senha);
 
                 if(result.Succeeded)
@@ -90,11 +91,17 @@ namespace TiAchei_Tcc.Controllers
                 }
                 else
                 {
+                    this.MostrarMensagem("Falha ao Cadastrar", TipoMensagem.Erro);
                     this.ModelState.AddModelError("Cadastra", "Falha ao cadastrar usuário.");
                     return View(model);
                 }
             }
-            return View(model);
+            else{
+                this.MostrarMensagem("Falha ao Cadastrar", TipoMensagem.Erro);
+                this.ModelState.AddModelError("Cadastra", "Falha ao cadastrar usuário.");
+                return View(model);
+            }
+
         }
 
 

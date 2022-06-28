@@ -8,7 +8,7 @@ namespace TiAchei_Tcc.Config
     {
         public void Configure(EntityTypeBuilder<CategoriaPet> builder)
         {
-            builder.Property(x => x.Nome).IsRequired();
+            builder.Property(x => x.Nome).HasColumnType("VARCHAR(30)").IsRequired();
             builder.Property(x => x.UserId).IsRequired();
         }
     }

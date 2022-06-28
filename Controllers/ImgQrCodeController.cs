@@ -7,10 +7,6 @@ namespace TiAchei_Tcc.Controllers
     {
         [HttpGet]
         public IActionResult Index(string id)
-        {
-            var url = $"https://{HttpContext.Request.Host.Value}/card/perfil/{id}";
-            var image = GeneratorQrCode.GenerateByteArray(url);
-            return File(image, "image/jpeg");
-        }
+            => File(GeneratorQrCode.GenerateByteArray($"https://{HttpContext.Request.Host.Value}/card/perfil/{id}"), "image/jpeg");    
     }
 }

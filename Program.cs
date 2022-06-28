@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TiAchei_Tcc.Controllers;
 using TiAchei_Tcc.Db;
 using TiAchei_Tcc.Models;
 using TiAchei_Tcc.Repository;
@@ -39,6 +38,7 @@ builder.Services.ConfigureApplicationCookie(options =>
         });
         
 builder.Services.AddScoped<IPetRepository, PetRepository>();
+builder.Services.AddScoped<IPessoaRepository, PessoaRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ServiceUploadFile>();
 
@@ -55,7 +55,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 

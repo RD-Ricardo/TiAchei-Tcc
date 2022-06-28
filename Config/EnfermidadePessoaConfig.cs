@@ -4,12 +4,11 @@ using TiAchei_Tcc.Models;
 
 namespace TiAchei_Tcc.Config
 {
-     public class CategoriaPessoaConfig : IEntityTypeConfiguration<EnfermidadePessoa>
+    public class EnfermidadePessoaConfig : IEntityTypeConfiguration<EnfermidadePessoa>
     {
         public void Configure(EntityTypeBuilder<EnfermidadePessoa> builder)
         {
-            builder.Property(x => x.Nome).IsRequired();
-            builder.Property(x => x.UserId).IsRequired();
+            builder.Property(x => x.Id).HasColumnType("VARCHAR(100)").IsRequired();
         }
     }
 }

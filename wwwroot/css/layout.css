@@ -250,6 +250,9 @@
       .img-ds{
           width: 100%;
       }
+      .btn-logout{
+        display: none;
+      }
   
 
 }

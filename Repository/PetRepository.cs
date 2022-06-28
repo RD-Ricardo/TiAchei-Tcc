@@ -14,6 +14,13 @@ namespace TiAchei_Tcc.Repository
         {
             _dbContext = dbContext;
         }
+
+        public  async Task CreateCategoryPet(CategoriaPet model)
+        {
+            await _dbContext.CategoriaPets.AddAsync(model);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task CreatePet(Pet model)
         {
             await _dbContext.Pets.AddAsync(model);
@@ -25,16 +32,14 @@ namespace TiAchei_Tcc.Repository
             var petResult = await GetBydId(id);
             if(petResult == null) return false;
             _dbContext.Pets.Remove(petResult);
-            if(await _dbContext.SaveChangesAsync() > 0){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return await _dbContext.SaveChangesAsync() > 0 ? true : false;
         }
 
+        public async Task<List<CategoriaPet>> GetAllCategoriesPetsUserCurrent(User model)
+            => await _dbContext.CategoriaPets.Where(x => x.UserId == model.Id).ToListAsync();
+
         public async Task<List<Pet>> GetAllPetsUserCurrent(User model)
-            =>  await _dbContext.Pets.Where(c  => c.UserId == model.Id).ToListAsync();
+            =>  await _dbContext.Pets.Include(x => x.Categoria).Where(c  => c.UserId == model.Id).ToListAsync();
         
         public async Task<Pet> GetBydId(string id) 
             => await _dbContext.Pets.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -42,14 +47,7 @@ namespace TiAchei_Tcc.Repository
         public async Task<bool> Update(Pet newModel)
         {
            _dbContext.Pets.Update(newModel);
-           if( await _dbContext.SaveChangesAsync() > 0)
-           {
-               return true;
-           }
-           else
-           {
-               return false;
-           }
+           return await _dbContext.SaveChangesAsync() > 0 ?  true : false;
         }
     }
 }

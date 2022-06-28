@@ -2,7 +2,14 @@
 <link rel="stylesheet" href="~/css/navegacao.css" asp-append-version="true" />
 <div class="conteudo-navegacao">
     <div class="img-user">
-        <img src="~/Imagens/@Model.FotoUrl"  width="100">
+        @if (@Model.FotoUrl != null)
+        {
+            <img src="~/Imagens/@Model.FotoUrl"  width="100">
+        } 
+        else
+        {
+            <img src="~/img/usuario.jpg" width="100">
+        } 
         <span class="mt-4 fw-bold">Bem-vindo @Model.UserName !!</span>
     </div>  
     <ul class="list-navegacao">
@@ -31,7 +38,7 @@
             </a>
         </li>
     </ul>
-    <form asp-action="Logout" asp-controller="User" method="POST">
+    <form class="btn-logout" asp-action="Logout" asp-controller="User" method="POST">
         <input class="bt" type="submit" value="Logout">                            
     </form>
 </div>

@@ -201,35 +201,12 @@ namespace TiAchei_Tcc.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CategoriaPesosas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CategoriaPesosas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CategoriaPesosas_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "CategoriaPets",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "longtext", nullable: false)
+                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -247,59 +224,25 @@ namespace TiAchei_Tcc.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "RedeSocials",
+                name: "EnfermidadePessoas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "VARCHAR(30)", nullable: false)
+                    Id = table.Column<string>(type: "VARCHAR(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UrlRede = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                    Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RedeSocials", x => x.Id);
+                    table.PrimaryKey("PK_EnfermidadePessoas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RedeSocials_AspNetUsers_UserId",
+                        name: "FK_EnfermidadePessoas_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Pessoas",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Nome = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Idade = table.Column<int>(type: "int", nullable: false),
-                    Perdida = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Descricao = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CategoriaPessoaId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pessoas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pessoas_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Pessoas_CategoriaPesosas_CategoriaPessoaId",
-                        column: x => x.CategoriaPessoaId,
-                        principalTable: "CategoriaPesosas",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -336,6 +279,45 @@ namespace TiAchei_Tcc.Migrations
                         name: "FK_Pets_CategoriaPets_CategoriaPetId",
                         column: x => x.CategoriaPetId,
                         principalTable: "CategoriaPets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Pessoas",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Nome = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Idade = table.Column<int>(type: "int", nullable: false),
+                    Perdido = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Descricao = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FotoUrl = table.Column<string>(type: "VARCHAR(250)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Categoria = table.Column<int>(type: "int", nullable: false),
+                    DataCriacao = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    EnfermidadePessoaId = table.Column<string>(type: "VARCHAR(100)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pessoas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pessoas_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Pessoas_EnfermidadePessoas_EnfermidadePessoaId",
+                        column: x => x.EnfermidadePessoaId,
+                        principalTable: "EnfermidadePessoas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -379,19 +361,19 @@ namespace TiAchei_Tcc.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoriaPesosas_UserId",
-                table: "CategoriaPesosas",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CategoriaPets_UserId",
                 table: "CategoriaPets",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pessoas_CategoriaPessoaId",
+                name: "IX_EnfermidadePessoas_UserId",
+                table: "EnfermidadePessoas",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pessoas_EnfermidadePessoaId",
                 table: "Pessoas",
-                column: "CategoriaPessoaId");
+                column: "EnfermidadePessoaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pessoas_UserId",
@@ -406,11 +388,6 @@ namespace TiAchei_Tcc.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Pets_UserId",
                 table: "Pets",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RedeSocials_UserId",
-                table: "RedeSocials",
                 column: "UserId");
         }
 
@@ -438,13 +415,10 @@ namespace TiAchei_Tcc.Migrations
                 name: "Pets");
 
             migrationBuilder.DropTable(
-                name: "RedeSocials");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "CategoriaPesosas");
+                name: "EnfermidadePessoas");
 
             migrationBuilder.DropTable(
                 name: "CategoriaPets");

@@ -1,10 +1,136 @@
+@model PagePessoaViewModel
 <div class="container-conteudo">
     <div class="row-conteudo">
         <div class="conteudo">
-             <h1>teste</h1>
+            @* <h2 class="text-center mb-md-5 mt-md-4">Pessoas <i class="bi bi-people"></i></h2> *@
+            <div class="d-grid teste-btn">
+                <a asp-action="CadastrarPessoa" asp-controller="Painel" class="btn btn-outline-secondary" type="button">CADASTRAR PESSOA<i class="bi bi-plus-circle"></i></a>
+            </div>
+             @{
+                if(@Model.Pessoas.ToList().Count > 0)
+                {
+                    <div class="conteudo-teste ">
+                        <div class="conteudo-info">
+                            <div class="card-info">
+                                    <div class="alert alert-primary" role="alert">
+                                        <i class="bi bi-shield-shaded"></i> Total de Pets: <strong>@Model.Pessoas.ToList().Count</strong> 
+                                    </div>
+                            </div>
+                            <div class="card-info">
+                                @if(@Model.Pessoas.Where(c => c.Perdido == false).ToList().Count > 0)
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="bi bi-shield-check"></i> Total de Pessoas Ok: <strong>@Model.Pessoas.Where(c => c.Perdido == false).ToList().Count </strong>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="bi bi-shield-check"></i> Total de Pessoas Ok: <strong>0</strong> 
+                                    </div>
+                                }
+                            </div>
+                            <div class="card-info">
+                                @if(@Model.Pessoas.Where(c => c.Perdido == true).ToList().Count > 0)
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="bi bi-shield-x"></i> Total de Pessoas Perdidos: <strong>@Model.Pessoas.Where(c => c.Perdido == true).ToList().Count</strong>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        <i class="bi bi-shield-x"></i> Total de Pessoas Perdidos: <strong>0</strong>
+                                    </div>
+                                }
+                            </div>
+                        </div>                    
+                        <div class="col-md-12 table-max teste-table">
+                                <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Foto</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Data Criação</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Funções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @Model.Pessoas)
+                                    {
+                                        <partial name="_ListPessoas" for="@item" ></partial>                        
+                                    }
+                                </tbody>
+                                </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger mt-5" role="alert">
+                        Você não tem nenhuma pessoa Cadastrada !
+                    </div>
+                }
+            }
         </div>
         <div class="navegacao">
-            <partial name="_Navegacao" ></partial>
+            <partial name="_Navegacao" for="@Model.Usuario"></partial>
         </div>
     </div>
 </div>
+<script>
+    const btn  = document.querySelectorAll('.search');
+    const btnFechar  = document.querySelector('.close');
+    const btnUpdate  = document.querySelector('.close');
+    let modal = document.querySelector('.update');
+    btn.forEach(x => x.addEventListener('click', async ()=>{
+        const local = window.location.host;
+        const id = x.getAttribute('data-id');
+        const url = `https://${local}/painel/buscarpessoa/${id}`;
+        let response  = await fetch(url)
+        if(response.ok){
+            let result = await response.json();
+            console.log(result);
+            modal.insertAdjacentHTML('beforeend', 
+            `
+                <div class="row p-2">
+                    <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                        <img class="border rounded-circle" src="https://${local}/ImgPets/${result.foto}" width="120" height="120">
+                        <input class="form-control mt-2" type="text" value="Nome: ${result.nome}" aria-label="Disabled input example" disabled><br>
+                        <input type="text" class="form-control" id="raca" value="Raça: ${result.raca}" disabled><br>
+                        <textarea class="form-control" id="descricao"  cols="30" rows="5" disabled>Descrição: ${result.descricao}</textarea><br>
+                    </div>
+                    <div class="col-12">
+                        <div class="card d-flex justify-content-center align-items-center">
+                            <img src="https://${local}/ImgQrCode/${id}" width="200">
+                            <div class="d-grid gap-2 w-100 p-1">
+                                <a href="https://${local}/Card/Perfil/${id}" class="btn btn-primary" type="button">Ver QR Coder</a>
+                                <a href="https://${local}/ImgQrCode/${id}" class="btn btn-success" download="" type="button">Baixar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            `);
+        }
+    }))
+
+    btnFechar.addEventListener('click', ()=>{
+        modal.innerHTML = "";
+    });
+    const btnDeletar = document.querySelectorAll('.deletar');
+    const btnSim = document.querySelector('.sim');
+    btnDeletar.forEach(x => x.addEventListener('click', ()=>{
+        const localDeletar = window.location.host;
+        const idDeletar = x.getAttribute('data-id');
+        btnSim.addEventListener('click', async ()=>{
+            console.log(idDeletar);
+            const urlNova = `https://${localDeletar}/painel/deletarpessoa/${idDeletar}`;
+            let response  = await fetch(urlNova,{ method:"DELETE" });
+             if(response.ok){
+                window.location.reload();
+            }  
+        });
+    }))   
+</script>

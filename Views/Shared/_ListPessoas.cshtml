@@ -1,7 +1,7 @@
-@model Pet
+@model Pessoa
 <tr>
     <td>
-        <img class="border rounded-circle"  src="~/ImgPets/@Html.DisplayFor(modelItem => @Model.Foto)" width="50">
+        <img class="border rounded-circle"  src="~/ImgPets/@Html.DisplayFor(modelItem => @Model.FotoUrl)" width="50">
     </td>
     <td data-label="Nome:"> @Html.DisplayFor(modelItem => @Model.Nome)</td>
     <td data-label="Status:">
@@ -15,10 +15,10 @@
         }
     </td>
     <td data-label="Data Criação:">
-      @Html.DisplayFor(modelModel => @Model.DataCricao)
+      @* @Html.DisplayFor(modelModel => @Model.DataCriacao) *@
     </td>
     <td data-label="Categoria:">
-      @Html.DisplayFor(modelModel => @Model.Categoria.Nome)
+      @Html.DisplayFor(modelModel => @Model.Categoria)
     </td>
     <td>
         <button type="button" class="btn btn-outline-primary search" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-placement="top" title="Vizualizar"><i class="bi bi-eye"></i></button>
@@ -34,11 +34,11 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">EXCLUIR PET</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">EXCLUIR PESSOA</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h6 class="text-center">Deseja excluir mesmo este Pet?</h6>
+        <h6 class="text-center">Deseja excluir mesmo está pessoa?</h6>
         <div class="d-flex justify-content-center p-2">
             <button type="button" class="btn btn-success sim">Sim</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">não</button>
@@ -53,7 +53,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">INFORMAÇÕES SOBRE O PET</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">INFORMAÇÕES SOBRE A PESSOA</h5>
         <input type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"/>
       </div>
       <div class="modal-body update">

@@ -15,15 +15,15 @@ namespace TiAchei_Tcc.Db
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new PetConfig());
-            builder.ApplyConfiguration(new RedeSocialConfig());
             builder.ApplyConfiguration(new UserConfig());
+            builder.ApplyConfiguration(new PessoaConfig());
             builder.ApplyConfiguration(new CategoriaPessoaConfig());
             builder.ApplyConfiguration(new CategoriaPetConfig());
+            builder.ApplyConfiguration(new EnfermidadePessoaConfig());
         }
         public DbSet<Pet> Pets {get;set;}
         public DbSet<Pessoa> Pessoas {get;set;}
-        public DbSet<RedeSocial> RedeSocials {get;set;}
         public DbSet<CategoriaPet> CategoriaPets { get; set; }
-        public DbSet<CategoriaPessoa> CategoriaPesosas { get; set; }
+        public DbSet<EnfermidadePessoa> EnfermidadePessoas { get; set; }
     }
 }

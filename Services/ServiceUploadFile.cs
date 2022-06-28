@@ -43,5 +43,22 @@ namespace TiAchei_Tcc.Services
             }
             return file;   
         }
+
+         public string UploadFilePessoa(PessoaViewModel vm)
+        {
+            string file = null;
+            if(vm.Profile != null)
+            {
+                string upLoadDir =  Path.Combine(_webHostEnvironment.WebRootPath,"ImgPets");
+                file = Guid.NewGuid().ToString()+"-"+ vm.Profile.FileName;
+                string filePath = Path.Combine(upLoadDir, file);
+
+                using(var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    vm.Profile.CopyTo(fileStream);
+                }
+            }
+            return file;   
+        }
     }
 }

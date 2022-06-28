@@ -1,6 +1,6 @@
 namespace TiAchei_Tcc.Models
 {
-    public class CategoriaPessoa
+    public class EnfermidadePessoa
     {
         public int  Id { get; set; }
         public string Nome { get; set; }
