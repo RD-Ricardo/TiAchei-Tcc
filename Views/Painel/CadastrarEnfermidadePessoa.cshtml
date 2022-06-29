@@ -1,21 +1,18 @@
-@model CategoriaPet
+@model EnfermidadePessoa
 <link rel="stylesheet" href="~/css/form.css" asp-append-version="true" />
 <div class="container p-4">
     <div class="row vh-100 align-items-center ">
         <partial name="_MensagemPartial"></partial>
         <div class="col-md-12 border rounded shadow">
-            <h2 class="text-center mt-5 mb-1" style="font-weight: bold; color:#808080;">ADICIONAR CATEGORIA PET</h2>
-            <form asp-action="CadastrarCategoriaPet" asp-controller="Painel" method="post">
+            <h2 class="text-center mt-5 mb-1" style="font-weight: bold; color:#808080;">ADICIONAR ENFERMIDADE PESSOA</h2>
+            <form asp-action="CadastrarEnfermidadePessoa" asp-controller="Painel" method="post">
                 <div class="col-12">
                     <label asp-for="@Model.Nome" class="form-label"></label>
                     <input asp-for="@Model.Nome" class="form-control">
                     <span asp-validation-for="@Model.Nome" class="text-danger"></span>
                 </div>
-                <div class="col-12 d-flex justify-content-center mt-3">
-                    <button class="btn bt p-1" type="submit">Adicionar</button>
-                </div>
-                <div class="col-12 mb-4">
-                    <a asp-action="CadastrarPet" asp-controller="Painel" class="btn btn-outline-primary">Voltar</a>
+                <div class="d-grid gap-2 mt-4 mb-4">
+                    <button class="btn bt" type="submit">Adicionar</button>
                 </div>
             </form>
         </div>

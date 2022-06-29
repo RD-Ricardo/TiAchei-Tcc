@@ -127,9 +127,9 @@ namespace TiAchei_Tcc.Controllers
         }
         
         [HttpGet]
-        public  IActionResult CadastrarCategoriaPessoa() => View();
+        public  IActionResult CadastrarEnfermidadePessoa() => View();
         [HttpPost]
-        public async Task<IActionResult> CadastrarCategoriaPessoa(PessoaViewModel model)
+        public async Task<IActionResult> CadastrarEnfermidadePessoa(PessoaViewModel model)
         {
                 
             var categoriaPessoaa = new EnfermidadePessoa()

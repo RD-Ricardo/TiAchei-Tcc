@@ -13,7 +13,7 @@ namespace TiAchei_Tcc.Models
        public User Usuario { get; set; }
        public CategoriaPessoa Categoria { get; set; }
        public DateTime DataCriacao { get; set; }
-       public int EnfermidadePessoaId { get; set; }
+       public string EnfermidadePessoaId { get; set; }
        public EnfermidadePessoa EnfermidadePessoa { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace TiAchei_Tcc.ViewModel
        public CategoriaPessoa Categoria { get; set; }
        public string  Descricao { get; set; }
        public IFormFile Profile { get; set; }
-       public int EnfermidadePessoaId { get; set; }
+       public string EnfermidadePessoaId { get; set; }
     }
 }

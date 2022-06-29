@@ -2,7 +2,7 @@ namespace TiAchei_Tcc.Models
 {
     public class EnfermidadePessoa
     {
-        public int  Id { get; set; }
+        public string  Id { get; set; } = Guid.NewGuid().ToString();
         public string Nome { get; set; }
         public string  UserId { get; set; }
         public User Usuario { get; set; }

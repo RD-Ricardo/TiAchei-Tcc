@@ -8,7 +8,14 @@ namespace TiAchei_Tcc.Config
     {
         public void Configure(EntityTypeBuilder<EnfermidadePessoa> builder)
         {
-            builder.Property(x => x.Id).HasColumnType("VARCHAR(100)").IsRequired();
+            builder.Property(x => x.Id).IsRequired();
+            builder.HasData(new EnfermidadePessoa
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Nome = "Não",
+                    UserId = "admin"
+                }
+            );
         }
     }
 }

@@ -36,7 +36,7 @@ namespace TiAchei_Tcc.Repository
             => await _dbContext.EnfermidadePessoas.Where(x => x.UserId == model.Id).ToListAsync();        
 
         public async Task<List<Pessoa>> GetAllPessoasUserCurrent(User model)
-         =>  await _dbContext.Pessoas.Include(x =>  x.Categoria).Where(c  => c.UserId == model.Id).ToListAsync();
+         =>  await _dbContext.Pessoas.Include(x =>  x.EnfermidadePessoa).Where(c  => c.UserId == model.Id).ToListAsync();
         
 
         public async Task<Pessoa> GetBydId(string id) 
