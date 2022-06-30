@@ -25,6 +25,12 @@ namespace TiAchei_Tcc.Controllers
         public async Task<IActionResult> Perfil(string id)
             => View(await _dbcontext.Pets.Include(c => c.Usuario)
                     .Where(c => c.Id == id).FirstOrDefaultAsync());
+        [HttpGet]
+        public async Task<IActionResult> PerfilPessoa(string id)
+            => View(await _dbcontext.Pessoas
+                    .Include(c => c.Usuario)
+                    .Include(x => x.EnfermidadePessoa)
+                    .Where(c => c.Id == id).FirstOrDefaultAsync());
         
     }
 }

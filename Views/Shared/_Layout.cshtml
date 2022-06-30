@@ -16,7 +16,7 @@
          <nav class="navbar navbar-expand-lg  bg-primary-color" id="navbar">
             <div class="container">
             <a asp-action="Index" asp-controller="Home" class="navbar-brand primary-color">
-                <img src="~/img/pLogo.png"  alt="TiACheiLogo" width="80" height="50"/>
+                <img src="~/img/logo.png"  alt="TiACheiLogo" width="150"/>
             </a>
             <button class="navbar-toggler primary-color" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-items" aria-controls="navbar-items" aria-expanded="false"
@@ -29,45 +29,49 @@
                         <a class="nav-link primary-color" href="@Url.Action("Index","Home")">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link primary-color" href="@Url.Action("Projeto","Home")">Projeto</a>
+                        <a class="nav-link primary-color" href="#projeto">Projeto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link primary-color" href="@Url.Action("QuemSomos","Home")">Quem Somos</a>
+                        <a class="nav-link primary-color" href="#sobre">Sobre Nós</a>
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {   <li class="nav-item">
                             <a class="nav-link primary-color" href="@Url.Action("Index","Painel")">Painel</a>
                         </li>
+                    }
+                    else
+                    {
+                          
                     } 
                 </ul>
                 <ul class="navbar-user me-auto mb-2 mb-lg-0">
-                <li class="nav-user">
-                    <div class="dropdown btn-login">
-                        <button class="btn btn-success dropdown-toggle bg-color3" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i>
-                        </button>
-                        <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-                            @if(User.Identity.IsAuthenticated)
-                            {
-                                <form asp-action="Logout" asp-controller="User" method="POST">
+                    <li class="nav-user">
+                        <div class="dropdown btn-login">
+                            <button class="btn btn-success dropdown-toggle bg-color3" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                            </button>
+                            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+                                @if(User.Identity.IsAuthenticated)
+                                {
+                                    <form asp-action="Logout" asp-controller="User" method="POST">
+                                        <li>
+                                            <input class="dropdown-item" type="submit" value="Logout">
+                                        </li>
+                                    </form>
+                                } 
+                                else
+                                {
                                     <li>
-                                        <input class="dropdown-item" type="submit" value="Logout">
+                                        <a class="dropdown-item" href="@Url.Action("Login","User")">Login</a>
                                     </li>
-                                </form>
-                            } 
-                            else
-                            {
-                                <li>
-                                    <a class="dropdown-item" href="@Url.Action("Login","User")">Login</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="@Url.Action("Cadastrar","User")">Cadastrar</a>
-                                </li>
-                            } 
-                        </ul>
-                    </div>
-                </li>
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("Cadastrar","User")">Cadastrar</a>
+                                    </li>
+                                } 
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
              </div>
             </div>

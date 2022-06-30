@@ -253,6 +253,29 @@
       .btn-logout{
         display: none;
       }
+
+      .container-home{
+        height: 100%;
+      }
   
 
+}
+
+.contato{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.contato a{
+    padding: 10px;
+    text-decoration: none;
+}
+
+.contato a:hover{
+    color: #5e5757;
+}
+
+.container-home{
+    height: 100vh;
 }

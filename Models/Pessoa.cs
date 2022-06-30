@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using TiAchei_Tcc.Enums;
 namespace TiAchei_Tcc.Models
 {
@@ -12,7 +13,8 @@ namespace TiAchei_Tcc.Models
        public string  UserId { get; set; }
        public User Usuario { get; set; }
        public CategoriaPessoa Categoria { get; set; }
-       public DateTime DataCriacao { get; set; }
+       [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+       public DateTime DataCriacao { get; set; } =  DateTime.Now;
        public string EnfermidadePessoaId { get; set; }
        public EnfermidadePessoa EnfermidadePessoa { get; set; }
     }

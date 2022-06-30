@@ -21,7 +21,7 @@ builder.Services.AddIdentity<User, IdentityRole>(x =>
             x.Password.RequireNonAlphanumeric = false;
             x.Password.RequireDigit = false;
             x.User.RequireUniqueEmail = true;
-            x.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
+            x.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+~ ";
         })
         .AddEntityFrameworkStores<AppDbContextMysql>()
         .AddDefaultTokenProviders();
@@ -73,6 +73,11 @@ app.UseEndpoints(endpoit =>
         pattern: "Card/Perfil/{id?}",
         defaults: new { Controller = "Card", Action = "Perfil"}
     );
+    endpoit.MapControllerRoute(
+        name: "cardfiltropessoa",
+        pattern: "Card/PerfilPessoa/{id?}",
+        defaults: new { Controller = "Card", Action = "PerfilPessoa"}
+    );
 
     endpoit.MapControllerRoute(
         name: "buscarid",
@@ -89,10 +94,15 @@ app.UseEndpoints(endpoit =>
         pattern: "Painel/QrCode/{id?}",
         defaults: new { Controller = "Painel", Action = "Qrcode"}
     );
-     endpoit.MapControllerRoute(
+    endpoit.MapControllerRoute(
         name: "imgqrcodeid",
         pattern: "ImgQrCode/{id?}",
         defaults: new { Controller = "ImgQrCode", Action = "Index"}
+    );
+    endpoit.MapControllerRoute(
+        name: "imgqrcodepessoaid",
+        pattern: "ImgQrCode/pessoa/{id?}",
+        defaults: new { Controller = "ImgQrCode", Action = "Pessoa"}
     );
     
     endpoit.MapControllerRoute(

@@ -7,18 +7,18 @@
                     <div class="mb-3 d-flex justify-content-center">
                         @if(@Model.FotoUrl == null)
                         {
-                            <img src="~/img/usuario.jpg" width="100">
+                            <img src="~/img/usuario.jpg" class="border rounded-circle" width="100">
                         }
                         else
                         {
-                            <img src="~/Imagens/@Model.FotoUrl"  width="100" height="100">
+                            <img src="~/Imagens/@Model.FotoUrl" class="border rounded-circle"  width="100" height="100">
                         }
                     </div>
                  <div>
-                    <form class="row g-3">
+                    <form class="row g-3" asp-action="Config" asp-controller="Painel">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Nome</label>
-                        <input  asp-for="@Model.UserName" type="email" class="form-control" id="inputEmail4">
+                        <input  asp-for="@Model.UserName" class="form-control" id="inputEmail4">
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Telefone</label>

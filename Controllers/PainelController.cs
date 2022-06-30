@@ -38,9 +38,6 @@ namespace TiAchei_Tcc.Controllers
         [HttpGet]
         public async Task<IActionResult> Objetos() => View(await _userManager.GetUserAsync(User));
 
-        [HttpGet]
-        public async Task<IActionResult> Config() => View(await _userManager.GetUserAsync(User));
-
         [HttpDelete]
         public async Task<IActionResult> Deletar(string id) => await _repository.DeletePet(id) ? Ok() : BadRequest();
         [HttpDelete]
@@ -119,6 +116,7 @@ namespace TiAchei_Tcc.Controllers
                 Categoria = model.Categoria,
                 UserId = _userManager.GetUserId(User),
                 Descricao = model.Descricao,
+                DataCriacao = DateTime.Now,
                 EnfermidadePessoaId = model.EnfermidadePessoaId 
             };
             await _repositoryPessoa.CreatePessoa(pessoaCurrent);
@@ -174,6 +172,20 @@ namespace TiAchei_Tcc.Controllers
             if(!await _repository.Update(model)) return BadRequest();
             return RedirectToAction("Index", "Painel");
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Config() => View(await _userManager.GetUserAsync(User));
+        [HttpPost]
+        public async Task<IActionResult> Config([FromForm]User mode) 
+        {
+           var update = await _userManager.UpdateAsync(mode);
+           if(update.Succeeded)
+           {
+                return View("Index");
+           }
+           return View();
+        } 
     
     }
 }

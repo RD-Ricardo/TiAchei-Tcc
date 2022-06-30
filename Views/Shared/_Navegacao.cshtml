@@ -4,11 +4,11 @@
     <div class="img-user">
         @if (@Model.FotoUrl != null)
         {
-            <img src="~/Imagens/@Model.FotoUrl"  width="100">
+            <img src="~/Imagens/@Model.FotoUrl" class="border rounded-circle"  width="100">
         } 
         else
         {
-            <img src="~/img/usuario.jpg" width="100">
+            <img src="~/img/usuario.jpg"  class="border rounded-circle" width="100">
         } 
         <span class="mt-4 fw-bold">Bem-vindo @Model.UserName !!</span>
     </div>  

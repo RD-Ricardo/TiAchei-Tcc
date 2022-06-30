@@ -8,5 +8,8 @@ namespace TiAchei_Tcc.Controllers
         [HttpGet]
         public IActionResult Index(string id)
             => File(GeneratorQrCode.GenerateByteArray($"https://{HttpContext.Request.Host.Value}/card/perfil/{id}"), "image/jpeg");    
+        [HttpGet]
+        public IActionResult Pessoa(string id)
+            => File(GeneratorQrCode.GenerateByteArray($"https://{HttpContext.Request.Host.Value}/card/perfilpessoa/{id}"), "image/jpeg");    
     }
 }

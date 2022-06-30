@@ -427,9 +427,7 @@ a:hover{
 
 }
 
-.btn-login{
-    display: none;
-}
+
 
 @media screen and (max-width: 767px){
     .btn-login{

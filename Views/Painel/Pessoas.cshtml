@@ -99,15 +99,15 @@
                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                         <img class="border rounded-circle" src="https://${local}/ImgPets/${result.foto}" width="120" height="120">
                         <input class="form-control mt-2" type="text" value="Nome: ${result.nome}" aria-label="Disabled input example" disabled><br>
-                        <input type="text" class="form-control" id="raca" value="Raça: ${result.raca}" disabled><br>
+                        <input type="text" class="form-control" id="raca" value="Idade: ${result.idade}" disabled><br>
                         <textarea class="form-control" id="descricao"  cols="30" rows="5" disabled>Descrição: ${result.descricao}</textarea><br>
                     </div>
                     <div class="col-12">
                         <div class="card d-flex justify-content-center align-items-center">
-                            <img src="https://${local}/ImgQrCode/${id}" width="200">
+                            <img src="https://${local}/ImgQrCode/pessoa/${id}" width="200">
                             <div class="d-grid gap-2 w-100 p-1">
-                                <a href="https://${local}/Card/Perfil/${id}" class="btn btn-primary" type="button">Ver QR Coder</a>
-                                <a href="https://${local}/ImgQrCode/${id}" class="btn btn-success" download="" type="button">Baixar</a>
+                                <a href="https://${local}/Card/PerfilPessoa/${id}" class="btn btn-primary" type="button">Ver QR Coder</a>
+                                <a href="https://${local}/ImgQrCode/pessoa/${id}" class="btn btn-success" download="" type="button">Baixar</a>
                             </div>
                         </div>
                     </div>
