@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'tiacheiapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FF6CF170F91B46C09C711446357C3C5E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1597843293594DA7872D047233E64154 }}
           package: .
