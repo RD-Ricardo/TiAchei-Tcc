@@ -1,13 +1,23 @@
 @model Pessoa
+@{
+    string strPhoneNumber = @Model.Usuario.PhoneNumber;
+    string[] charsToRemove = new string[] { "-", "(", ")" };
+    foreach (var c in charsToRemove)
+    {
+        strPhoneNumber = strPhoneNumber.Replace(c, string.Empty);
+    }
+
+    string numberCurrent = "55" + strPhoneNumber;
+}
 <link rel="stylesheet" href="~/css/card.css" asp-append-version="true" />
 <div class="container mt-1">
     <div class="row border rounded-4 text-white p-4" style="background-color:#212529;">
         <h3 class="mb-1">Informações da Pessoa</h3>
         <div class="col-12">
-            @if(@Model.Perdido)
+            @if (@Model.Perdido)
             {
-                <div class="alert alert-danger mt-4" role="alert"  style="color: red;">
-                    Essa pessoa está perdida entre em contato com o responsável  
+                <div class="alert alert-danger mt-4" role="alert" style="color: red;">
+                    Essa pessoa está perdida entre em contato com o responsável
                     <i class="bi bi-exclamation-circle" style="color: red;"></i>
                 </div>
             }
@@ -15,16 +25,16 @@
         <div class="col-12">
             <div class="row mt-5">
                 <div class="col-md-6">
-                    <p class="text-secondary" style="margin-bottom: -1px;">Nome</p> 
+                    <p class="text-secondary" style="margin-bottom: -1px;">Nome</p>
                     <h2 class="mb-2">@Model.Nome</h2>
-                    <p class="text-secondary">Descriçao</p> 
+                    <p class="text-secondary">Descriçao</p>
                     <p>@Model.Descricao</p>
                     <p class="text-secondary mt-" style="margin-bottom: -1px;">Categoria</p>
-                    <p>@Model.Categoria</p> 
-                    <p class="text-secondary" style="margin-bottom: -1px;">Idade</p> 
-                    <p>@Model.Idade</p> 
+                    <p>@Model.Categoria</p>
+                    <p class="text-secondary" style="margin-bottom: -1px;">Idade</p>
+                    <p>@Model.Idade</p>
                     <p class="text-secondary mt-" style="margin-bottom: -1px;">Enfermidade</p>
-                    <p>@Model.EnfermidadePessoa.Nome </p> 
+                    <p>@Model.EnfermidadePessoa.Nome </p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <img class="border rounded-circle mb-3" src="~/ImgPets/@Model.FotoUrl" width="200" height="200">
@@ -39,20 +49,24 @@
                     <p>Nome: <span class="badge bg-success fs-6"> @Model.Usuario.UserName</span></p>
                     <p>Telefone: <span class="badge bg-success fs-6"> @Model.Usuario.PhoneNumber</span></p>
                     <div class="d-grid gap-3">
-                         @{
-                                @if(!string.IsNullOrEmpty(@Model.Usuario.UrlFacebook))
-                                {
-                                    <a href="@Model.Usuario.UrlFacebook" class="btn btn-outline-primary" type="button"><i class="bi bi-facebook">&nbsp;&nbsp;Facebook</i></a>
-                                }
-                                @if(!string.IsNullOrEmpty(@Model.Usuario.UrlInstagram))
-                                {
-                                   <a href="@Model.Usuario.UrlInstagram" class="btn btn-outline-danger" type="button"><i class="bi bi-instagram">&nbsp;&nbsp;Instagram</i></a>
-                                }
-                                @if(!string.IsNullOrEmpty(@Model.Usuario.PhoneNumber))
-                                {
-                                    <a href="https://api.whatsapp.com/send?1=pt_BR&phone=@Model.Usuario.PhoneNumber" target="_blank" class="btn btn-outline-success" type="button"><i class="bi bi-whatsapp mr-4">&nbsp;&nbsp;WhastApp</i></a>
-                                }
+                        @{
+                            @if (!string.IsNullOrEmpty(@Model.Usuario.UrlFacebook))
+                            {
+                                <a href="@Model.Usuario.UrlFacebook" class="btn btn-outline-primary" type="button"><i
+                                    class="bi bi-facebook">&nbsp;&nbsp;Facebook</i></a>
                             }
+                            @if (!string.IsNullOrEmpty(@Model.Usuario.UrlInstagram))
+                            {
+                                <a href="@Model.Usuario.UrlInstagram" class="btn btn-outline-danger" type="button"><i
+                                    class="bi bi-instagram">&nbsp;&nbsp;Instagram</i></a>
+                            }
+                            @if (!string.IsNullOrEmpty(@Model.Usuario.PhoneNumber))
+                            {
+                                <a href="https://api.whatsapp.com/send?phone=@numberCurrent" target="_blank"
+                                class="btn btn-outline-success" type="button"><i
+                                    class="bi bi-whatsapp mr-4">&nbsp;&nbsp;WhastApp</i></a>
+                            }
+                        }
                     </div>
                 </div>
             </div>
