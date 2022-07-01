@@ -11,7 +11,7 @@
         }
         else
         {
-            <span class="badge bg-success">encontrado</span>
+            <span class="badge bg-success">seguro</span>
         }
     </td>
     <td data-label="Data Criação:">
@@ -22,7 +22,7 @@
     </td>
     <td>
         <button type="button" class="btn btn-outline-primary search" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-placement="top" title="Vizualizar"><i class="bi bi-eye"></i></button>
-        <a href="@Url.Action("Editar", "Painel", new { id = @Model.Id })" data-id="@Html.DisplayFor(modelModel => @Model.Id)"  class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top"><i class="bi bi-pencil"></i></a>
+        <a href="@Url.Action("EditarPessoa", "Painel", new { id = @Model.Id })" data-id="@Html.DisplayFor(modelModel => @Model.Id)"  class="btn btn-outline-success" data-bs-toggle="tooltip" data-bs-placement="top"><i class="bi bi-pencil"></i></a>
         <button type="button" class="btn btn-outline-danger deletar" data-id="@Html.DisplayFor(modelModel => @Model.Id)" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><i class="bi bi-trash"></i></button>
     </td>
 </tr>

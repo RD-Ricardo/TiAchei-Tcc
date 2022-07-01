@@ -1,3 +1,8 @@
+@{
+  ViewData["Title"] = "Painel";
+}
+
+
 @model PainelViewModel
 <div class="container-conteudo">
     <div class="row-conteudo">
@@ -13,20 +18,20 @@
                         <div class="conteudo-info">
                             <div class="card-info">
                                     <div class="alert alert-primary" role="alert">
-                                        <i class="bi bi-shield-shaded"></i> Total de Pets: <strong>@Model.Pets.ToList().Count</strong> 
+                                        <i class="bi bi-shield-shaded"></i> Total de pets: <strong>@Model.Pets.ToList().Count</strong> 
                                     </div>
                             </div>
                             <div class="card-info">
                                 @if(@Model.Pets.Where(c => c.Perdido == false).ToList().Count > 0)
                                 {
                                     <div class="alert alert-success" role="alert">
-                                        <i class="bi bi-shield-check"></i> Total de Pets Ok: <strong>@Model.Pets.Where(c => c.Perdido == false).ToList().Count </strong>
+                                        <i class="bi bi-shield-check"></i> Total de pets seguros: <strong>@Model.Pets.Where(c => c.Perdido == false).ToList().Count </strong>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="alert alert-success" role="alert">
-                                        <i class="bi bi-shield-check"></i> Total de Pets Ok: <strong>0</strong> 
+                                        <i class="bi bi-shield-check"></i> Total de pets seguros: <strong>0</strong> 
                                     </div>
                                 }
                             </div>
@@ -34,13 +39,13 @@
                                 @if(@Model.Pets.Where(c => c.Perdido == true).ToList().Count > 0)
                                 {
                                     <div class="alert alert-danger" role="alert">
-                                        <i class="bi bi-shield-x"></i> Total de Pets Perdidos: <strong>@Model.Pets.Where(c => c.Perdido == true).ToList().Count</strong>
+                                        <i class="bi bi-shield-x"></i> Total de pets perdidos: <strong>@Model.Pets.Where(c => c.Perdido == true).ToList().Count</strong>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="alert alert-danger" role="alert">
-                                        <i class="bi bi-shield-x"></i> Total de Pets Perdidos: <strong>0</strong>
+                                        <i class="bi bi-shield-x"></i> Total de pets perdidos: <strong>0</strong>
                                     </div>
                                 }
                             </div>

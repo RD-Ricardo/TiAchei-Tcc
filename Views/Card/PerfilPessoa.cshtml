@@ -7,7 +7,7 @@
             @if(@Model.Perdido)
             {
                 <div class="alert alert-danger mt-4" role="alert"  style="color: red;">
-                    Esse animal está perdido entre em contato com o responsável  
+                    Essa pessoa está perdida entre em contato com o responsável  
                     <i class="bi bi-exclamation-circle" style="color: red;"></i>
                 </div>
             }
@@ -19,6 +19,12 @@
                     <h2 class="mb-2">@Model.Nome</h2>
                     <p class="text-secondary">Descriçao</p> 
                     <p>@Model.Descricao</p>
+                    <p class="text-secondary mt-" style="margin-bottom: -1px;">Categoria</p>
+                    <p>@Model.Categoria</p> 
+                    <p class="text-secondary" style="margin-bottom: -1px;">Idade</p> 
+                    <p>@Model.Idade</p> 
+                    <p class="text-secondary mt-" style="margin-bottom: -1px;">Enfermidade</p>
+                    <p>@Model.EnfermidadePessoa.Nome </p> 
                 </div>
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                     <img class="border rounded-circle mb-3" src="~/ImgPets/@Model.FotoUrl" width="200" height="200">

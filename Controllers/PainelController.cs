@@ -137,7 +137,7 @@ namespace TiAchei_Tcc.Controllers
             };
             await _repositoryPessoa.CreateCategoryPessoa(categoriaPessoaa);
             this.MostrarMensagem("Categoria cadastrada com sucesso", TipoMensagem.Sucesso);
-            return RedirectToAction("CadastrarCategoriaPessoa");             
+            return RedirectToAction("CadastrarEnfermidadePessoa");             
         }
 
         [HttpGet]
@@ -173,19 +173,47 @@ namespace TiAchei_Tcc.Controllers
             return RedirectToAction("Index", "Painel");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditarPessoa(string id) 
+        {
+
+            ViewBag.CategoryId = new SelectList(await _repositoryPessoa.GetAllCategoriesPessoasUserCurrent(await _userManager.GetUserAsync(User)),"Id", "Nome");
+            return View(await  _repositoryPessoa.GetBydId(id));
+        } 
+
+        [HttpPost]
+        public async Task<IActionResult> EditarPessoa([FromForm]Pessoa model)
+        {
+            var userCurrent = await _userManager.GetUserAsync(User);
+            model.UserId = userCurrent.Id;
+            if(!await _repositoryPessoa.Update(model)) return BadRequest();
+            return RedirectToAction("Pessoas", "Painel");
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Config() => View(await _userManager.GetUserAsync(User));
         [HttpPost]
         public async Task<IActionResult> Config([FromForm]User mode) 
         {
-           var update = await _userManager.UpdateAsync(mode);
-           if(update.Succeeded)
-           {
-                return View("Index");
-           }
-           return View();
-        } 
-    
-    }
+            User userCurrent = await _userManager.FindByIdAsync(mode.Id.ToString());
+            userCurrent.Email = mode.Email;
+            userCurrent.UserName = mode.UserName;
+            userCurrent.UrlFacebook = mode.UrlFacebook;
+            userCurrent.UrlInstagram = mode.UrlInstagram;
+            userCurrent.PhoneNumber = mode.PhoneNumber;
+            userCurrent.PasswordHash = mode.PasswordHash;
+            
+            var result = await _userManager.UpdateAsync(userCurrent);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+    }   
 }

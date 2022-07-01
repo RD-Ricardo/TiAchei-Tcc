@@ -1,3 +1,7 @@
+@{
+  ViewData["Title"] = "Config";
+}
+
 @model User
 <div class="container-conteudo">
     <div class="row-conteudo">
@@ -16,29 +20,30 @@
                     </div>
                  <div>
                     <form class="row g-3" asp-action="Config" asp-controller="Painel">
+                          <input asp-for="@Model.Id" type="hidden">
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Nome</label>
-                        <input  asp-for="@Model.UserName" class="form-control" id="inputEmail4">
+                        <input  asp-for="@Model.UserName" class="form-control" id="inputEmail4" disabled> 
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword4" class="form-label">Telefone</label>
-                        <input asp-for="@Model.PhoneNumber" class="form-control" id="inputPassword4">
+                        <input asp-for="@Model.PhoneNumber" class="form-control" id="inputPassword4" disabled>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Email</label>
-                        <input asp-for="@Model.Email" class="form-control" disabled>
+                        <input  asp-for="@Model.Email" class="form-control" disabled>
                     </div>
                     <div class="col-12">
                         <label for="formFile" class="form-label"></label>Foto</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <input asp-for="@Model.FotoUrl" class="form-control" type="file" id="formFile" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="inputCity" class="form-label">Facebook</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input asp-for="@Model.UrlFacebook" class="form-control" id="inputCity" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="inputCity" class="form-label">Instagram</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input  asp-for="@Model.UrlInstagram" class="form-control" id="inputCity" disabled>
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-outline-primary">Atualizar Informações</button>

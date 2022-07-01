@@ -10,11 +10,16 @@
                     <label asp-for="@Model.Nome" class="form-label"></label>
                     <input asp-for="@Model.Nome" class="form-control">
                     <span asp-validation-for="@Model.Nome" class="text-danger"></span>
+                    <span style="margin-left: 5px;" class="text-secondary">caso não tenha alguma enfermidade coloque no nome (não)</span>
                 </div>
-                <div class="d-grid gap-2 mt-4 mb-4">
-                    <button class="btn bt" type="submit">Adicionar</button>
+                <div class="col-md-12 d-flex justify-content-center mt-5">
+                    <button class="bt p-1" type="submit">Adicionar</button>
+                </div>
+                  <div class="col-md-12 mb-4">
+                    <a asp-action="CadastrarPessoa" asp-controller="Painel" class="btn btn-outline-primary">Voltar</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
